@@ -10,7 +10,8 @@ export default NextAuth({
         params: {
           scope: 'identify email guilds'
         }
-      }
+      },
+      redirectUri: 'https://www.lumidiscord.xyz/api/auth/callback/discord'
     })
   ],
   callbacks: {
