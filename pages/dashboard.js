@@ -1,7 +1,8 @@
-import { useSession, getSession } from 'next-auth/react'
+import { useSession, getSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Dashboard() {
   const { data: session, status } = useSession()
@@ -29,105 +30,248 @@ export default function Dashboard() {
       <Head>
         <title>Dashboard - Lumi Bot</title>
         <meta name="description" content="Painel de controle da Lumi Bot" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-        {/* Header */}
-        <header className="bg-black/20 backdrop-blur-sm border-b border-purple-500/30">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <img src="/lumi-avatar.png" alt="Lumi" className="w-10 h-10 rounded-full" />
-              <h1 className="text-2xl font-bold text-white">Dashboard Lumi</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <img src={session.user.image} alt={session.user.name} className="w-8 h-8 rounded-full" />
-              <span className="text-white">{session.user.name}</span>
+      {/* Navigation */}
+      <nav className="navbar">
+        <div className="nav-container">
+          <div className="nav-logo">
+            <img src="/images/lumi-avatar.png" alt="Lumi" />
+            <span>Lumi</span>
+          </div>
+          <div className="nav-links">
+            <Link href="/">Início</Link>
+            <Link href="/premium">Premium</Link>
+            <Link href="/docs">Docs</Link>
+            <Link href="/support">Suporte</Link>
+            <button onClick={() => signOut()} className="btn-logout">
+              Sair
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <div className="dashboard-page">
+
+        <div className="container">
+          <div className="dashboard-header">
+            <div className="user-info">
+              <img src={session.user.image} alt={session.user.name} className="user-avatar" />
+              <div>
+                <h1>Dashboard</h1>
+                <p>Bem-vindo, {session.user.name}!</p>
+              </div>
             </div>
           </div>
-        </header>
 
-        {/* Main Content */}
-        <main className="max-w-6xl mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            {/* Welcome Card */}
-            <div className="col-span-full bg-black/30 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30">
-              <h2 className="text-2xl font-bold text-white mb-2">
-                Bem-vindo, {session.user.name}! 👋
-              </h2>
-              <p className="text-purple-200">
-                Gerencie suas configurações da Lumi e monitore a atividade dos seus servidores.
-              </p>
-            </div>
-
+          <div className="dashboard-grid">
             {/* Server Stats */}
-            <div className="bg-black/30 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30">
-              <h3 className="text-xl font-bold text-white mb-4">📊 Estatísticas</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-purple-200">Servidores:</span>
-                  <span className="text-white font-bold">0</span>
+            <div className="dashboard-card">
+              <h3>📊 Estatísticas</h3>
+              <div className="stats-list">
+                <div className="stat-item">
+                  <span>Servidores:</span>
+                  <span>0</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-purple-200">Comandos hoje:</span>
-                  <span className="text-white font-bold">0</span>
+                <div className="stat-item">
+                  <span>Comandos hoje:</span>
+                  <span>0</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-purple-200">Usuários ativos:</span>
-                  <span className="text-white font-bold">0</span>
+                <div className="stat-item">
+                  <span>Usuários ativos:</span>
+                  <span>0</span>
                 </div>
               </div>
             </div>
 
             {/* Quick Actions */}
-            <div className="bg-black/30 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30">
-              <h3 className="text-xl font-bold text-white mb-4">⚡ Ações Rápidas</h3>
-              <div className="space-y-3">
-                <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors">
-                  Convidar Lumi
-                </button>
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors">
-                  Ver Comandos
-                </button>
-                <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors">
-                  Suporte
-                </button>
+            <div className="dashboard-card">
+              <h3>⚡ Ações Rápidas</h3>
+              <div className="actions-list">
+                <button className="action-btn primary">Convidar Lumi</button>
+                <Link href="/docs" className="action-btn secondary">Ver Comandos</Link>
+                <Link href="/support" className="action-btn tertiary">Suporte</Link>
               </div>
             </div>
 
             {/* Premium Status */}
-            <div className="bg-black/30 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30">
-              <h3 className="text-xl font-bold text-white mb-4">💎 Status Premium</h3>
-              <div className="text-center">
-                <div className="bg-orange-600 text-white py-2 px-4 rounded-lg mb-3">
-                  Plano Gratuito
-                </div>
-                <p className="text-purple-200 text-sm mb-4">
-                  Upgrade para desbloquear recursos premium
-                </p>
-                <button 
-                  onClick={() => router.push('/premium')}
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 px-4 rounded-lg transition-colors"
-                >
+            <div className="dashboard-card">
+              <h3>💎 Status Premium</h3>
+              <div className="premium-status">
+                <div className="status-badge free">Plano Gratuito</div>
+                <p>Upgrade para desbloquear recursos premium</p>
+                <Link href="/premium" className="action-btn premium">
                   Fazer Upgrade
-                </button>
+                </Link>
               </div>
             </div>
-
-            {/* Recent Activity */}
-            <div className="col-span-full bg-black/30 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30">
-              <h3 className="text-xl font-bold text-white mb-4">📈 Atividade Recente</h3>
-              <div className="text-center py-8">
-                <p className="text-purple-200">Nenhuma atividade recente</p>
-                <p className="text-purple-300 text-sm mt-2">
-                  Convide a Lumi para o seu servidor para começar!
-                </p>
-              </div>
-            </div>
-
           </div>
-        </main>
+        </div>
       </div>
+      <style jsx>{`
+        .dashboard-page {
+          padding: 120px 2rem 60px;
+          min-height: 100vh;
+        }
+        
+        .dashboard-header {
+          margin-bottom: 3rem;
+        }
+        
+        .user-info {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+        
+        .user-avatar {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          border: 3px solid #a855f7;
+        }
+        
+        .user-info h1 {
+          margin: 0;
+          color: #a855f7;
+          font-size: 2rem;
+        }
+        
+        .user-info p {
+          margin: 0.5rem 0 0 0;
+          color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .dashboard-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+        }
+        
+        .dashboard-card {
+          background: rgba(255, 255, 255, 0.05);
+          padding: 2rem;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dashboard-card h3 {
+          color: #a855f7;
+          margin-bottom: 1.5rem;
+          font-size: 1.25rem;
+        }
+        
+        .stats-list {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        
+        .stat-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        
+        .stat-item span:first-child {
+          color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .stat-item span:last-child {
+          color: white;
+          font-weight: bold;
+        }
+        
+        .actions-list {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        
+        .action-btn {
+          padding: 0.75rem 1rem;
+          border-radius: 8px;
+          border: none;
+          cursor: pointer;
+          text-decoration: none;
+          text-align: center;
+          transition: all 0.3s ease;
+          font-weight: 500;
+        }
+        
+        .action-btn.primary {
+          background: #a855f7;
+          color: white;
+        }
+        
+        .action-btn.primary:hover {
+          background: #9333ea;
+        }
+        
+        .action-btn.secondary {
+          background: #3b82f6;
+          color: white;
+        }
+        
+        .action-btn.secondary:hover {
+          background: #2563eb;
+        }
+        
+        .action-btn.tertiary {
+          background: #10b981;
+          color: white;
+        }
+        
+        .action-btn.tertiary:hover {
+          background: #059669;
+        }
+        
+        .action-btn.premium {
+          background: linear-gradient(45deg, #a855f7, #ec4899);
+          color: white;
+        }
+        
+        .action-btn.premium:hover {
+          background: linear-gradient(45deg, #9333ea, #db2777);
+        }
+        
+        .premium-status {
+          text-align: center;
+        }
+        
+        .status-badge {
+          display: inline-block;
+          padding: 0.5rem 1rem;
+          border-radius: 8px;
+          margin-bottom: 1rem;
+          font-weight: 500;
+        }
+        
+        .status-badge.free {
+          background: #f59e0b;
+          color: white;
+        }
+        
+        .premium-status p {
+          color: rgba(255, 255, 255, 0.7);
+          margin-bottom: 1.5rem;
+        }
+        
+        .btn-logout {
+          background: #ef4444;
+          color: white;
+          border: none;
+          padding: 0.5rem 1rem;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+          background: #dc2626;
+        }
+      `}</style>
     </>
   )
 }

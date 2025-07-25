@@ -39,7 +39,7 @@ export default function Support() {
           <p>Precisa de ajuda? Estamos aqui para você!</p>
 
           <div className="support-grid">
-            <div className="support-card">
+            <div className="support-card email-card">
               <h3>📧 Email</h3>
               <p>Envie um email para nossa equipe de suporte</p>
               <a href="mailto:suporte@lumidiscord.xyz" className="btn-secondary">
@@ -102,6 +102,24 @@ export default function Support() {
           margin-bottom: 1rem;
           font-size: 1.25rem;
           font-weight: 600;
+        }
+        
+        .email-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-height: 200px;
+        }
+        
+        .email-card h3 {
+          margin-bottom: 1.5rem;
+        }
+        
+        .email-card p {
+          margin-bottom: 2rem;
+          text-align: center;
+          line-height: 1.6;
         }
         
         .command-example {
