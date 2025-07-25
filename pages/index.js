@@ -30,14 +30,18 @@ export default function Home() {
         <header className="container mx-auto px-6 py-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                L
-              </div>
+              <Image
+                src="/lumi-avatar.png"
+                alt="Lumi Bot Avatar"
+                width={48}
+                height={48}
+                className="rounded-full"
+              />
               <span className="text-white text-2xl font-bold">Lumi</span>
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#features" className="text-white hover:text-purple-300 transition-colors">Recursos</a>
-              <a href="#pricing" className="text-white hover:text-purple-300 transition-colors">Planos</a>
+              <a href="/premium" className="text-white hover:text-purple-300 transition-colors">Planos</a>
               <a href="/docs" className="text-white hover:text-purple-300 transition-colors">Docs</a>
               <a href="/support" className="text-white hover:text-purple-300 transition-colors">Suporte</a>
             </nav>
