@@ -74,37 +74,60 @@ export default function Checkout() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-      <div className="container mx-auto px-6 py-20">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-white text-center mb-12">
-            Finalizar Assinatura Premium
-          </h1>
+    <>
+      <Head>
+        <title>Checkout - Lumi Bot</title>
+        <meta name="description" content="Finalizar compra do plano premium da Lumi" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-          <div className="grid md:grid-cols-2 gap-8">
+      {/* Navigation */}
+      <nav className="navbar">
+        <div className="nav-container">
+          <div className="nav-logo">
+            <img src="/images/lumi-avatar.png" alt="Lumi" />
+            <span>Lumi</span>
+          </div>
+          <div className="nav-links">
+            <Link href="/">Início</Link>
+            <Link href="/premium">Premium</Link>
+            <Link href="/docs">Docs</Link>
+            <Link href="/support">Suporte</Link>
+            {session ? (
+              <Link href="/dashboard" className="btn-login">Dashboard</Link>
+            ) : (
+              <button onClick={() => signIn('discord')} className="btn-login">
+                Login Discord
+              </button>
+            )}
+          </div>
+        </div>
+      </nav>
+
+      <div className="checkout-page">
+        <div className="container">
+          <h1>Finalizar Assinatura Premium</h1>
+
+          <div className="checkout-grid">
             {/* Plan Selection */}
-            <div className="glass-effect p-8">
-              <h2 className="text-2xl font-bold text-white mb-6">Escolha seu Plano</h2>
+            <div className="plan-selection">
+              <h2>Escolha seu Plano</h2>
               
               {Object.entries(plans).map(([key, plan]) => (
                 <div 
                   key={key}
-                  className={`p-4 rounded-lg border-2 cursor-pointer mb-4 transition-all ${
-                    selectedPlan === key 
-                      ? 'border-purple-400 bg-purple-500/20' 
-                      : 'border-gray-600 hover:border-gray-500'
-                  }`}
+                  className={`plan-option ${selectedPlan === key ? 'selected' : ''}`}
                   onClick={() => setSelectedPlan(key)}
                 >
-                  <div className="flex justify-between items-center mb-3">
-                    <h3 className="text-xl font-bold text-white">{plan.name}</h3>
-                    <div className="text-2xl font-bold text-white">
-                      R$ {plan.price}<span className="text-sm">/mês</span>
+                  <div className="plan-header">
+                    <h3>{plan.name}</h3>
+                    <div className="plan-price">
+                      R$ {plan.price}<span>/mês</span>
                     </div>
                   </div>
-                  <ul className="text-gray-200 space-y-1">
+                  <ul className="plan-features">
                     {plan.features.map((feature, index) => (
-                      <li key={index} className="text-sm">✅ {feature}</li>
+                      <li key={index}>✅ {feature}</li>
                     ))}
                   </ul>
                 </div>
@@ -112,46 +135,41 @@ export default function Checkout() {
             </div>
 
             {/* Checkout Form */}
-            <div className="glass-effect p-8">
-              <h2 className="text-2xl font-bold text-white mb-6">Resumo do Pedido</h2>
+            <div className="checkout-summary">
+              <h2>Resumo do Pedido</h2>
               
               {session ? (
-                <div className="mb-6">
-                  <div className="flex items-center mb-4">
+                <div className="user-info">
+                  <div className="user-details">
                     <img 
                       src={session.user.image} 
                       alt={session.user.name}
-                      className="w-12 h-12 rounded-full mr-3"
+                      className="user-avatar"
                     />
                     <div>
-                      <div className="text-white font-bold">{session.user.name}</div>
-                      <div className="text-gray-300 text-sm">{session.user.email}</div>
+                      <div className="user-name">{session.user.name}</div>
+                      <div className="user-email">{session.user.email}</div>
                     </div>
                   </div>
                 </div>
               ) : (
-                <div className="mb-6 p-4 bg-yellow-500/20 border border-yellow-500 rounded-lg">
-                  <p className="text-yellow-200 mb-3">
-                    Você precisa fazer login para continuar
-                  </p>
+                <div className="login-required">
+                  <p>Você precisa fazer login para continuar</p>
                   <button
                     onClick={() => router.push('/api/auth/signin?callbackUrl=' + encodeURIComponent(window.location.href))}
-                    className="bg-[#5865F2] hover:bg-[#4752C4] text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 mx-auto"
+                    className="btn-discord"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.196.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                    </svg>
-                    <span>Fazer Login com Discord</span>
+                    Fazer Login com Discord
                   </button>
                 </div>
               )}
 
-              <div className="border-t border-gray-600 pt-4 mb-6">
-                <div className="flex justify-between text-lg">
-                  <span className="text-gray-200">Plano {plans[selectedPlan].name}</span>
-                  <span className="text-white font-bold">R$ {plans[selectedPlan].price}/mês</span>
+              <div className="order-details">
+                <div className="order-item">
+                  <span>Plano {plans[selectedPlan].name}</span>
+                  <span>R$ {plans[selectedPlan].price}/mês</span>
                 </div>
-                <div className="flex justify-between text-sm text-gray-400 mt-1">
+                <div className="order-info">
                   <span>Cobrança mensal recorrente</span>
                   <span>Cancele quando quiser</span>
                 </div>
@@ -160,12 +178,12 @@ export default function Checkout() {
               <button
                 onClick={handlePayment}
                 disabled={isProcessing || !session}
-                className="w-full btn-primary text-lg py-4 disabled:opacity-50"
+                className="checkout-btn"
               >
                 {isProcessing ? 'Processando...' : `💳 Assinar por R$ ${plans[selectedPlan].price}/mês`}
               </button>
 
-              <div className="mt-6 text-center text-sm text-gray-400">
+              <div className="payment-info">
                 <p>🔒 Pagamento seguro via Mercado Pago</p>
                 <p>✅ Cancele quando quiser, sem taxas</p>
                 <p>🎯 Ativação imediata após confirmação</p>
@@ -173,13 +191,231 @@ export default function Checkout() {
             </div>
           </div>
 
-          <div className="text-center mt-8">
-            <a href="/" className="text-purple-300 hover:text-white transition-colors">
-              ← Voltar ao início
-            </a>
+          <div className="back-link">
+            <Link href="/">← Voltar ao início</Link>
           </div>
         </div>
       </div>
-    </div>
+
+      <style jsx>{`
+        .checkout-page {
+          padding: 120px 2rem 60px;
+          min-height: 100vh;
+        }
+        
+        .checkout-page h1 {
+          text-align: center;
+          color: #a855f7;
+          margin-bottom: 3rem;
+          font-size: 2.5rem;
+        }
+        
+        .checkout-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          gap: 2rem;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+        
+        .plan-selection, .checkout-summary {
+          background: rgba(255, 255, 255, 0.05);
+          padding: 2rem;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .plan-selection h2, .checkout-summary h2 {
+          color: #a855f7;
+          margin-bottom: 2rem;
+          font-size: 1.5rem;
+        }
+        
+        .plan-option {
+          padding: 1.5rem;
+          border: 2px solid rgba(255, 255, 255, 0.2);
+          border-radius: 12px;
+          margin-bottom: 1rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        
+        .plan-option:hover {
+          border-color: #a855f7;
+        }
+        
+        .plan-option.selected {
+          border-color: #a855f7;
+          background: rgba(168, 85, 247, 0.1);
+        }
+        
+        .plan-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+        }
+        
+        .plan-header h3 {
+          color: white;
+          font-size: 1.25rem;
+          margin: 0;
+        }
+        
+        .plan-price {
+          color: white;
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+        
+        .plan-price span {
+          font-size: 0.8rem;
+          color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .plan-features {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        
+        .plan-features li {
+          color: rgba(255, 255, 255, 0.8);
+          margin-bottom: 0.5rem;
+          font-size: 0.9rem;
+        }
+        
+        .user-details {
+          display: flex;
+          align-items: center;
+          margin-bottom: 2rem;
+        }
+        
+        .user-avatar {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          margin-right: 1rem;
+        }
+        
+        .user-name {
+          color: white;
+          font-weight: bold;
+          margin-bottom: 0.25rem;
+        }
+        
+        .user-email {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 0.9rem;
+        }
+        
+        .login-required {
+          text-align: center;
+          padding: 2rem;
+          background: rgba(251, 191, 36, 0.1);
+          border: 1px solid rgba(251, 191, 36, 0.3);
+          border-radius: 12px;
+          margin-bottom: 2rem;
+        }
+        
+        .login-required p {
+          color: rgba(251, 191, 36, 0.9);
+          margin-bottom: 1rem;
+        }
+        
+        .btn-discord {
+          background: #5865F2;
+          color: white;
+          border: none;
+          padding: 0.75rem 1.5rem;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background 0.3s ease;
+        }
+        
+        .btn-discord:hover {
+          background: #4752C4;
+        }
+        
+        .order-details {
+          border-top: 1px solid rgba(255, 255, 255, 0.2);
+          padding-top: 1.5rem;
+          margin-bottom: 2rem;
+        }
+        
+        .order-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+          font-size: 1.1rem;
+        }
+        
+        .order-item span:first-child {
+          color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .order-item span:last-child {
+          color: white;
+          font-weight: bold;
+        }
+        
+        .order-info {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .checkout-btn {
+          width: 100%;
+          background: linear-gradient(45deg, #a855f7, #ec4899);
+          color: white;
+          border: none;
+          padding: 1rem 2rem;
+          border-radius: 12px;
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          margin-bottom: 2rem;
+        }
+        
+        .checkout-btn:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+        }
+        
+        .checkout-btn:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        
+        .payment-info {
+          text-align: center;
+        }
+        
+        .payment-info p {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 0.9rem;
+          margin-bottom: 0.5rem;
+        }
+        
+        .back-link {
+          text-align: center;
+          margin-top: 3rem;
+        }
+        
+        .back-link a {
+          color: #a855f7;
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+        
+        .back-link a:hover {
+          color: white;
+        }
+      `}</style>
+    </>
   )
 }
