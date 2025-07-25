@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import { useSession } from 'next-auth/react'
+import { useSession, signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Checkout() {
   const { data: session } = useSession()
