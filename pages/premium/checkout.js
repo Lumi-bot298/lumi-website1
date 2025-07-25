@@ -14,26 +14,33 @@ export default function Checkout() {
   const plans = {
     premium: {
       name: 'Premium',
-      price: 19,
+      price: 9.90,
       features: [
-        '37 comandos completos',
-        'IA conversacional avançada',
-        'Música ilimitada do YouTube',
-        'Analytics em tempo real',
-        'Mini-games premium',
-        'Suporte prioritário'
+        'Música sem limite',
+        'Comandos premium',
+        'Suporte prioritário',
+        'Dashboard avançado'
+      ]
+    },
+    'premium-plus': {
+      name: 'Premium+',
+      price: 19.90,
+      features: [
+        'Tudo do Premium',
+        'IA ilimitada',
+        'Analytics avançados',
+        'Customização total',
+        'Multi-servidores'
       ]
     },
     enterprise: {
       name: 'Enterprise',
-      price: 49,
+      price: 49.90,
       features: [
-        'Todos recursos Premium',
-        'Personalização total',
-        'Dashboard exclusivo',
+        'Tudo do Premium+',
+        'Servidores ilimitados',
         'API personalizada',
-        'Suporte 24/7',
-        'SLA garantido'
+        'Suporte dedicado'
       ]
     }
   }
@@ -62,10 +69,19 @@ export default function Checkout() {
 
       const preference = await response.json()
       
-      if (preference.init_point) {
-        window.location.href = preference.init_point
+      if (preference.success) {
+        if (preference.demo) {
+          // Sistema demo - mostrar mensagem e redirecionar
+          alert(preference.message)
+          window.location.href = preference.init_point
+        } else if (preference.init_point) {
+          // Pagamento real do Mercado Pago
+          window.location.href = preference.init_point
+        } else {
+          throw new Error('Resposta inválida da API')
+        }
       } else {
-        throw new Error('Erro ao criar preferência de pagamento')
+        throw new Error(preference.error || 'Erro ao criar preferência de pagamento')
       }
     } catch (error) {
       console.error('Erro no pagamento:', error)
