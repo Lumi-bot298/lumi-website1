@@ -15,10 +15,10 @@ export default NextAuth({
   ],
   callbacks: {
     async redirect({ url, baseUrl }) {
-      // Garantir redirecionamento correto para lumidiscord.xyz
-      if (url.startsWith('/')) return `https://lumidiscord.xyz${url}`
-      else if (new URL(url).origin === 'https://lumidiscord.xyz') return url
-      return 'https://lumidiscord.xyz'
+      // Garantir redirecionamento correto para www.lumidiscord.xyz
+      if (url.startsWith('/')) return `https://www.lumidiscord.xyz${url}`
+      else if (new URL(url).origin === 'https://www.lumidiscord.xyz') return url
+      return 'https://www.lumidiscord.xyz'
     },
     async session({ session, token }) {
       session.accessToken = token.accessToken
