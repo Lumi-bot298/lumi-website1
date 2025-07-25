@@ -310,12 +310,12 @@ export default function Enterprise() {
                   Junte-se às organizações que já confiam na Lumi Enterprise
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button 
-                    onClick={handleSubmit}
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-lg transition-colors text-lg font-semibold"
+                  <a 
+                    href="/premium/checkout?plan=enterprise"
+                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-lg transition-colors text-lg font-semibold inline-block"
                   >
-                    Agendar Demonstração
-                  </button>
+                    Comprar Enterprise
+                  </a>
                   <a href="/support" className="bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-lg transition-colors text-lg">
                     Falar com Especialista
                   </a>

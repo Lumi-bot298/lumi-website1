@@ -29,10 +29,16 @@ export default NextAuth({
       session.refreshToken = token.refreshToken
       session.user.profile = token.profile
       return session
+    },
+    async redirect({ url, baseUrl }) {
+      // Permite redirecionamentos para URLs do mesmo domínio
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      // Permite redirecionamentos para o domínio base
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
     }
   },
   pages: {
-    signIn: '/auth/signin',
     error: '/auth/error'
   },
   secret: process.env.NEXTAUTH_SECRET
