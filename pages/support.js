@@ -40,14 +40,6 @@ export default function Support() {
 
           <div className="support-grid">
             <div className="support-card">
-              <h3>💬 Discord</h3>
-              <p>Entre no nosso servidor Discord oficial para suporte em tempo real</p>
-              <a href="https://discord.gg/lumi" className="btn-primary" target="_blank">
-                Entrar no Discord
-              </a>
-            </div>
-
-            <div className="support-card">
               <h3>📧 Email</h3>
               <p>Envie um email para nossa equipe de suporte</p>
               <a href="mailto:suporte@lumidiscord.xyz" className="btn-secondary">
@@ -108,6 +100,8 @@ export default function Support() {
         .support-card h3 {
           color: #a855f7;
           margin-bottom: 1rem;
+          font-size: 1.25rem;
+          font-weight: 600;
         }
         
         .command-example {

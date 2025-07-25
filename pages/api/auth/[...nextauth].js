@@ -10,8 +10,7 @@ export default NextAuth({
         params: {
           scope: 'identify email guilds'
         }
-      },
-      redirectUri: 'https://www.lumidiscord.xyz/api/auth/callback/discord'
+      }
     })
   ],
   callbacks: {
@@ -38,5 +37,6 @@ export default NextAuth({
     signIn: '/login',
     error: '/auth/error'
   },
-  secret: process.env.NEXTAUTH_SECRET
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: true
 })
