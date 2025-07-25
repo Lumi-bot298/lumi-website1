@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte - Lumi</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/lumi-avatar.png?v=6">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0F0B19 0%, #2D1B69 50%, #7B2CBF 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .nav-links a.active {
+            color: #E0AAFF;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+        }
+        
+        .header-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .header-section h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #E0AAFF, #C77DFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header-section p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Support Cards */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+        
+        .support-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .support-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(123, 44, 191, 0.3);
+        }
+        
+        .support-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #7B2CBF, #E0AAFF);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+        }
+        
+        .support-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: white;
+        }
+        
+        .support-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        
+        .support-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #7B2CBF, #E0AAFF);
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .support-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(123, 44, 191, 0.3);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 60px;
+        }
+        
+        .faq-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .faq-question h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .faq-icon {
+            color: #E0AAFF;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-answer {
+            padding: 0 24px 20px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: white;
+        }
+        
+        .contact-section p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(123, 44, 191, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .contact-item i {
+            color: #E0AAFF;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+        
+        .footer p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer a {
+            color: #E0AAFF;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .nav-links {
+                gap: 16px;
+            }
+            
+            .header-section h1 {
+                font-size: 36px;
+            }
+            
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <img src="/images/lumi-avatar.png" alt="Lumi">
+                    <span>Lumi</span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="/">Início</a>
+                    <a href="/premium/plans">Premium</a>
+                    <a href="/demo">Demo</a>
+                    <a href="/support" class="active">Suporte</a>
+                    <a href="/dashboard">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header Section -->
+            <section class="header-section">
+                <h1>Central de Suporte</h1>
+                <p>Precisa de ajuda? Nossa equipe está aqui para auxiliar você com qualquer dúvida sobre a Lumi</p>
+            </section>
+
+            <!-- Support Options -->
+            <div class="support-grid">
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <h3>Discord Oficial</h3>
+                    <p>Entre no nosso servidor Discord para suporte em tempo real, dicas e interação com a comunidade</p>
+                    <a href="https://discord.gg/lumi" target="_blank" class="support-btn">
+                        Entrar no Discord
+                    </a>
+                </div>
+
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>Envie um email detalhado com sua dúvida e nossa equipe responderá em até 24 horas</p>
+                    <a href="mailto:suporte@lumi.bot" class="support-btn">
+                        Enviar Email
+                    </a>
+                </div>
+
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Documentação</h3>
+                    <p>Acesse nossa documentação completa com guias, tutoriais e exemplos de uso</p>
+                    <a href="/docs" class="support-btn">
+                        Ver Documentação
+                    </a>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>Perguntas Frequentes</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Como adicionar a Lumi ao meu servidor?</h4>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Clique no botão "Adicionar Bot" no dashboard ou use este link: <a href="https://discord.com/api/oauth2/authorize?client_id=1388711731508805702&permissions=8&scope=bot" style="color: #E0AAFF;">Adicionar Lumi</a></p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Quais são os comandos principais da Lumi?</h4>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Use !ajuda para ver todos os 37 comandos disponíveis. Os principais incluem: !moderacao, !musica, !economia, !ia, !analytics, !personalizacao e muito mais.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>A Lumi é gratuita?</h4>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! A Lumi oferece recursos básicos gratuitamente. Para recursos avançados como IA premium, analytics detalhados e suporte VIP, oferecemos planos Pro (R$15/mês) e Enterprise (R$45/mês).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Como configurar a moderação automática?</h4>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Use o comando !moderacao para acessar o painel de configuração interativo ou acesse pelo dashboard web. Você pode configurar filtros de palavras, punições automáticas e muito mais.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>A Lumi funciona com música do YouTube?</h4>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! A Lumi possui sistema de música integrado com YouTube. Use !musica para acessar os controles interativos com botões modernos.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="contact-section">
+                <h2>Ainda precisa de ajuda?</h2>
+                <p>Nossa equipe está disponível para ajudar você</p>
+                
+                <div class="contact-info">
+                    <a href="mailto:suporte@lumi.bot" class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>suporte@lumi.bot</span>
+                    </a>
+                    
+                    <a href="https://discord.gg/lumi" target="_blank" class="contact-item">
+                        <i class="fab fa-discord"></i>
+                        <span>Discord Oficial</span>
+                    </a>
+                    
+                    <a href="https://github.com/dyblack" target="_blank" class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px;">
+                <img src="/images/lumi-avatar.png" alt="Lumi" style="width: 32px; height: 32px; border-radius: 50%;">
+                <span style="font-size: 20px; font-weight: 700;">Lumi</span>
+            </div>
+            <p>
+                © 2025 Lumi Bot. Desenvolvido por 
+                <a href="https://github.com/dyblack">Guilherme Almeida (Dy. Black)</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

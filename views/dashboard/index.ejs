@@ -1,0 +1,307 @@
+<%- include('../layout') -%>
+
+<!-- Dashboard Container -->
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 min-h-screen bg-black/20 backdrop-blur-lg border-r border-white/10">
+            <div class="p-6">
+                <div class="flex items-center space-x-3 mb-8">
+                    <img src="/images/lumi-logo.svg" alt="Lumi" class="h-10 w-10 rounded-lg">
+                    <div>
+                        <h2 class="text-white font-bold text-lg">Dashboard</h2>
+                        <p class="text-white/60 text-sm">Painel de Controle</p>
+                    </div>
+                </div>
+                
+                <!-- User Info -->
+                <div class="bg-white/5 rounded-xl p-4 mb-6">
+                    <div class="flex items-center space-x-3">
+                        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" 
+                             alt="Avatar" class="h-12 w-12 rounded-full">
+                        <div>
+                            <div class="text-white font-semibold"><%= user.username %></div>
+                            <div class="text-purple-400 text-sm">Admin</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <nav class="space-y-2">
+                    <a href="/dashboard" class="sidebar-link active flex items-center space-x-3">
+                        <i class="fas fa-home"></i>
+                        <span>Visão Geral</span>
+                    </a>
+                    <a href="/dashboard/servers" class="sidebar-link flex items-center space-x-3">
+                        <i class="fas fa-server"></i>
+                        <span>Meus Servidores</span>
+                    </a>
+                    <a href="/premium/plans" class="sidebar-link flex items-center space-x-3">
+                        <i class="fas fa-crown text-yellow-400"></i>
+                        <span>Upgrade Premium</span>
+                    </a>
+                    <a href="/dashboard/analytics" class="sidebar-link flex items-center space-x-3">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="/dashboard/support" class="sidebar-link flex items-center space-x-3">
+                        <i class="fas fa-headset"></i>
+                        <span>Suporte</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1">
+            <!-- Header -->
+            <header class="bg-white/5 backdrop-blur-lg border-b border-white/10 px-8 py-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold text-white">Bem-vindo de volta!</h1>
+                        <p class="text-white/70">Aqui está um resumo da sua atividade com a Lumi</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-6 py-3 rounded-xl hover:from-purple-600 hover:to-violet-600 transition-all">
+                            <i class="fas fa-plus mr-2"></i>
+                            Adicionar Servidor
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <main class="p-8">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="stat-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-server text-white text-xl"></i>
+                            </div>
+                            <span class="text-green-400 text-sm font-semibold">+2 este mês</span>
+                        </div>
+                        <div class="text-3xl font-bold text-white mb-1 counter" data-target="4">0</div>
+                        <div class="text-white/60">Servidores Ativos</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-users text-white text-xl"></i>
+                            </div>
+                            <span class="text-green-400 text-sm font-semibold">+15%</span>
+                        </div>
+                        <div class="text-3xl font-bold text-white mb-1 counter" data-target="1250">0</div>
+                        <div class="text-white/60">Usuários Alcançados</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-bolt text-white text-xl"></i>
+                            </div>
+                            <span class="text-green-400 text-sm font-semibold">+340 hoje</span>
+                        </div>
+                        <div class="text-3xl font-bold text-white mb-1 counter" data-target="8940">0</div>
+                        <div class="text-white/60">Comandos Executados</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-crown text-white text-xl"></i>
+                            </div>
+                            <span class="text-purple-400 text-sm font-semibold">Premium</span>
+                        </div>
+                        <div class="text-3xl font-bold text-white mb-1 counter" data-target="0">0</div>
+                        <div class="text-white/60">Upgrades Premium</div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Server Management -->
+                    <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10">
+                        <h3 class="text-2xl font-bold text-white mb-6">Gerenciar Servidores</h3>
+                        <div class="space-y-4" id="serversList">
+                            <!-- Servers will be loaded here -->
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-server text-white"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-white font-semibold">Carregando servidores...</div>
+                                        <div class="text-white/60 text-sm">Aguarde um momento</div>
+                                    </div>
+                                </div>
+                                <div class="loading-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Stats -->
+                    <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10">
+                        <h3 class="text-2xl font-bold text-white mb-6">Atividade Recente</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                                <div class="flex-1">
+                                    <div class="text-white font-medium">Sistema de Auto-Reparo Ativado</div>
+                                    <div class="text-white/60 text-sm">Há 2 minutos</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-3 h-3 bg-blue-400 rounded-full"></div>
+                                <div class="flex-1">
+                                    <div class="text-white font-medium">IA respondeu 23 conversas hoje</div>
+                                    <div class="text-white/60 text-sm">Há 5 minutos</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-3 h-3 bg-purple-400 rounded-full"></div>
+                                <div class="flex-1">
+                                    <div class="text-white font-medium">340 comandos executados hoje</div>
+                                    <div class="text-white/60 text-sm">Há 10 minutos</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                                <div class="flex-1">
+                                    <div class="text-white font-medium">12 sessões de música ativas</div>
+                                    <div class="text-white/60 text-sm">Há 15 minutos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Premium CTA -->
+                <div class="bg-gradient-to-r from-purple-600/20 to-violet-600/20 backdrop-blur-lg rounded-3xl p-8 border border-purple-500/30 mb-8">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Desbloqueie Todo o Potencial da Lumi</h3>
+                            <p class="text-white/80 mb-4">Faça upgrade para o Lumi Pro e tenha acesso a IA avançada, analytics premium e muito mais!</p>
+                            <ul class="text-white/70 space-y-1 mb-6">
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>IA com memória avançada</li>
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>Analytics de 30 dias</li>
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>15+ temas premium</li>
+                                <li><i class="fas fa-check text-green-400 mr-2"></i>Suporte VIP &lt; 2h</li>
+                            </ul>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-white mb-2">R$ 15</div>
+                            <div class="text-white/60 mb-4">por mês</div>
+                            <a href="/premium/plans" class="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-8 py-3 rounded-xl hover:from-purple-600 hover:to-violet-600 transition-all font-semibold">
+                                Fazer Upgrade
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature Highlights -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-wrench text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3">Auto-Reparo</h4>
+                        <p class="text-white/70 mb-4">Sistema revolucionário que detecta e corrige problemas automaticamente</p>
+                        <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-semibold">
+                            Ativo
+                        </span>
+                    </div>
+                    
+                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-brain text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3">IA Conversacional</h4>
+                        <p class="text-white/70 mb-4">Primeira IA verdadeiramente conversacional em português</p>
+                        <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm font-semibold">
+                            23 conversas hoje
+                        </span>
+                    </div>
+                    
+                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-music text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3">Música Real</h4>
+                        <p class="text-white/70 mb-4">Sistema de música com busca real no YouTube</p>
+                        <span class="bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full text-sm font-semibold">
+                            12 sessões ativas
+                        </span>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script>
+// Load user servers
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const response = await fetch('/api/user-guilds');
+        const guilds = await response.json();
+        
+        const serversList = document.getElementById('serversList');
+        
+        if (guilds.length === 0) {
+            serversList.innerHTML = `
+                <div class="text-center p-8">
+                    <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-server text-white/60 text-2xl"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-2">Nenhum servidor encontrado</h4>
+                    <p class="text-white/60 mb-4">Adicione a Lumi aos seus servidores para começar</p>
+                    <a href="/auth/discord" class="bg-[#5865F2] text-white px-6 py-2 rounded-lg hover:bg-[#4752C4] transition-colors">
+                        Adicionar ao Discord
+                    </a>
+                </div>
+            `;
+        } else {
+            serversList.innerHTML = guilds.map(guild => `
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <img src="${guild.icon || '/images/default-server.png'}" alt="${guild.name}" class="w-12 h-12 rounded-full">
+                        <div>
+                            <div class="text-white font-semibold">${guild.name}</div>
+                            <div class="text-white/60 text-sm">
+                                ${guild.bot_present ? 
+                                    `<span class="text-green-400"><i class="fas fa-check mr-1"></i>Lumi Ativa</span>` : 
+                                    `<span class="text-orange-400"><i class="fas fa-plus mr-1"></i>Adicionar Lumi</span>`
+                                }
+                                ${guild.premium ? '<span class="text-purple-400 ml-2"><i class="fas fa-crown mr-1"></i>Premium</span>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        ${guild.bot_present ? 
+                            `<a href="/dashboard/server/${guild.id}" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors">
+                                Configurar
+                            </a>` : 
+                            `<a href="https://discord.com/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&scope=bot&permissions=8&guild_id=${guild.id}" class="bg-[#5865F2] text-white px-4 py-2 rounded-lg hover:bg-[#4752C4] transition-colors">
+                                Adicionar
+                            </a>`
+                        }
+                    </div>
+                </div>
+            `).join('');
+        }
+    } catch (error) {
+        console.error('Erro ao carregar servidores:', error);
+        document.getElementById('serversList').innerHTML = `
+            <div class="text-center p-8">
+                <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-exclamation-triangle text-red-400 text-2xl"></i>
+                </div>
+                <h4 class="text-white font-semibold mb-2">Erro ao carregar servidores</h4>
+                <p class="text-white/60">Tente recarregar a página</p>
+            </div>
+        `;
+    }
+});
+</script>

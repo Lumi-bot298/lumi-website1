@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos Premium - Lumi</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/lumi-avatar.png?v=6">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0F0B19 0%, #2D1B69 50%, #7B2CBF 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #7B2CBF, #9D4EDD);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .header h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+        
+        .header p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Plans Grid */
+        .plans-section {
+            padding: 80px 0;
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .plan-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .plan-card.featured {
+            border: 2px solid #7B2CBF;
+            position: relative;
+        }
+        
+        .plan-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        
+        .plan-period {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        
+        .plan-features i {
+            color: #00D26A;
+            font-size: 18px;
+        }
+        
+        .plan-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-free {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .btn-pro {
+            background: linear-gradient(135deg, #7B2CBF, #9D4EDD);
+            color: white;
+        }
+        
+        .btn-enterprise {
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
+            color: white;
+        }
+        
+        .plan-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #7B2CBF, #9D4EDD);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+        
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 4px solid rgba(123, 44, 191, 0.3);
+            border-top: 4px solid #7B2CBF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .footer p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer a {
+            color: #7B2CBF;
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <img src="/images/lumi-avatar.png" alt="Lumi">
+                    <span class="logo-text">Lumi</span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="/">Início</a>
+                    <a href="/premium/demo">Demo</a>
+                    <% if (user) { %>
+                        <a href="/dashboard" class="btn-primary">Dashboard</a>
+                    <% } else { %>
+                        <a href="/login" class="btn-primary">
+                            <i class="fab fa-discord"></i> Login
+                        </a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="header">
+        <div class="container">
+            <h1>Planos Premium</h1>
+            <p>Desbloqueie todo o potencial da Lumi com recursos exclusivos e suporte VIP</p>
+        </div>
+    </section>
+
+    <!-- Plans -->
+    <section class="plans-section">
+        <div class="container">
+            <div class="plans-grid">
+                <!-- Free Plan -->
+                <div class="plan-card">
+                    <h3 class="plan-title">Free</h3>
+                    <div class="plan-price">Grátis</div>
+                    <div class="plan-period">Para sempre</div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 40+ Comandos Funcionais</li>
+                        <li><i class="fas fa-check"></i> Música Real do YouTube</li>
+                        <li><i class="fas fa-check"></i> Sistema de Níveis</li>
+                        <li><i class="fas fa-check"></i> Moderação Básica</li>
+                        <li><i class="fas fa-check"></i> Mini-games Interativos</li>
+                    </ul>
+                    
+                    <button class="plan-btn btn-free" disabled>
+                        Plano Atual
+                    </button>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="plan-card featured">
+                    <h3 class="plan-title">Pro</h3>
+                    <div class="plan-price">R$ 15</div>
+                    <div class="plan-period">por mês</div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="fas fa-star"></i> Tudo do Free +</li>
+                        <li><i class="fas fa-brain"></i> IA Avançada com Memória</li>
+                        <li><i class="fas fa-chart-line"></i> Analytics de 30 Dias</li>
+                        <li><i class="fas fa-palette"></i> 15+ Temas Premium</li>
+                        <li><i class="fas fa-music"></i> Música Premium 320kbps</li>
+                        <li><i class="fas fa-headset"></i> Suporte VIP < 2h</li>
+                    </ul>
+                    
+                    <button class="plan-btn btn-pro" id="btn-pro" data-plan="pro">
+                        Escolher Pro
+                    </button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="plan-card">
+                    <h3 class="plan-title">Enterprise</h3>
+                    <div class="plan-price">R$ 45</div>
+                    <div class="plan-period">por mês</div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="fas fa-crown"></i> Tudo do Pro +</li>
+                        <li><i class="fas fa-robot"></i> IA Personalizada Exclusiva</li>
+                        <li><i class="fas fa-infinity"></i> Analytics Ilimitados</li>
+                        <li><i class="fas fa-clock"></i> Suporte 24/7 Dedicado</li>
+                        <li><i class="fas fa-rocket"></i> Consultoria de Crescimento</li>
+                        <li><i class="fas fa-cog"></i> Recursos Personalizados</li>
+                    </ul>
+                    
+                    <button class="plan-btn btn-enterprise" id="btn-enterprise" data-plan="enterprise">
+                        Escolher Enterprise
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-credit-card" style="color: white; font-size: 24px;"></i>
+            </div>
+            <h3 style="margin-bottom: 16px;">Processando Pagamento</h3>
+            <p style="margin-bottom: 24px; color: rgba(255, 255, 255, 0.7);">Redirecionando para o checkout seguro...</p>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px;">
+                <img src="/images/lumi-avatar.png" alt="Lumi" style="width: 32px; height: 32px; border-radius: 50%;">
+                <span style="font-size: 20px; font-weight: 700;">Lumi</span>
+            </div>
+            <p>
+                © 2025 Lumi Bot. Desenvolvido por 
+                <a href="https://github.com/dyblack">Guilherme Almeida (Dy. Black)</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Debug - testar se script carrega
+        console.log('Script carregado com sucesso');
+        
+        function showPaymentModal() {
+            console.log('Mostrando modal');
+            document.getElementById('paymentModal').classList.add('show');
+        }
+
+        function hidePaymentModal() {
+            console.log('Escondendo modal');
+            document.getElementById('paymentModal').classList.remove('show');
+        }
+
+        function selectPlan(plan) {
+            console.log('=== FUNÇÃO SELECTPLAN CHAMADA ===');
+            console.log('Plano selecionado:', plan);
+            
+            // Verificar se usuário está logado via JavaScript
+            const isLoggedIn = <%= JSON.stringify(!!user) %>;
+            console.log('Usuário logado?', isLoggedIn);
+            
+            if (!isLoggedIn) {
+                console.log('Usuário não logado, redirecionando...');
+                alert('Você precisa fazer login primeiro!');
+                window.location.href = '/login';
+                return;
+            }
+            
+            showPaymentModal();
+            
+            // Usar sistema de pagamento brasileiro
+            fetch('/payments/create-payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ plan: plan })
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                if (response.redirected) {
+                    hidePaymentModal();
+                    alert('Você precisa fazer login primeiro!');
+                    window.location.href = '/login';
+                    return;
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (!data) return; // Se foi redirecionado
+                
+                console.log('Payment response:', data);
+                hidePaymentModal();
+                
+                if (data.success) {
+                    if (data.demo) {
+                        alert('Sistema Demo: Em produção, você poderá pagar com PIX, boleto, cartão ou PicPay via Mercado Pago.');
+                    }
+                    window.location.href = data.checkout_url;
+                } else {
+                    alert('Erro: ' + (data.error || 'Erro desconhecido'));
+                }
+            })
+            .catch(error => {
+                hidePaymentModal();
+                console.error('=== ERRO NO FETCH ===', error);
+                alert('Erro ao processar pagamento. Tente novamente.');
+            });
+        }
+        
+        // Event listeners seguros (sem CSP inline)
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM carregado');
+            
+            const proButton = document.getElementById('btn-pro');
+            const enterpriseButton = document.getElementById('btn-enterprise');
+            
+            console.log('Botão Pro encontrado:', !!proButton);
+            console.log('Botão Enterprise encontrado:', !!enterpriseButton);
+            
+            if (proButton) {
+                proButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const plan = this.getAttribute('data-plan');
+                    console.log('Clique no botão Pro detectado, plano:', plan);
+                    selectPlan(plan);
+                });
+            }
+            
+            if (enterpriseButton) {
+                enterpriseButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const plan = this.getAttribute('data-plan');
+                    console.log('Clique no botão Enterprise detectado, plano:', plan);
+                    selectPlan(plan);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

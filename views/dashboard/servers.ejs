@@ -1,0 +1,192 @@
+<%- include('../layout') -%>
+
+<!-- Dashboard Container -->
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 min-h-screen bg-black/20 backdrop-blur-lg border-r border-white/10">
+            <div class="p-6">
+                <div class="flex items-center space-x-3 mb-8">
+                    <img src="/images/lumi-avatar.png" alt="Lumi" class="h-10 w-10 rounded-lg">
+                    <div>
+                        <h2 class="text-white font-bold text-lg">Dashboard</h2>
+                        <p class="text-white/60 text-sm">Painel de Controle</p>
+                    </div>
+                </div>
+                
+                <!-- User Info -->
+                <div class="bg-white/5 rounded-xl p-4 mb-6">
+                    <div class="flex items-center space-x-3">
+                        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" 
+                             alt="Avatar" class="h-12 w-12 rounded-full">
+                        <div>
+                            <div class="text-white font-semibold"><%= user.username %></div>
+                            <div class="text-purple-400 text-sm">Admin</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <nav class="space-y-2">
+                    <a href="/dashboard" class="sidebar-link flex items-center space-x-3">
+                        <i class="fas fa-home"></i>
+                        <span>Visão Geral</span>
+                    </a>
+                    <a href="/dashboard/servers" class="sidebar-link active flex items-center space-x-3">
+                        <i class="fas fa-server"></i>
+                        <span>Meus Servidores</span>
+                    </a>
+                    <a href="/premium/plans" class="sidebar-link flex items-center space-x-3">
+                        <i class="fas fa-crown text-yellow-400"></i>
+                        <span>Upgrade Premium</span>
+                    </a>
+                    <a href="/auth/logout" class="sidebar-link flex items-center space-x-3 text-red-400">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Sair</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1">
+            <!-- Header -->
+            <header class="bg-white/5 backdrop-blur-lg border-b border-white/10 px-8 py-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold text-white">Meus Servidores</h1>
+                        <p class="text-white/70">Gerencie a Lumi em seus servidores Discord</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="refreshServers()" class="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-6 py-3 rounded-xl hover:from-purple-600 hover:to-violet-600 transition-all">
+                            <i class="fas fa-sync-alt mr-2"></i>
+                            Atualizar
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Servers Content -->
+            <main class="p-8">
+                <!-- Loading State -->
+                <div id="loading" class="text-center py-12">
+                    <div class="animate-spin w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+                    <p class="text-white/60">Carregando seus servidores...</p>
+                </div>
+
+                <!-- Servers Grid -->
+                <div id="servers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+                    <!-- Servidores serão carregados aqui -->
+                </div>
+
+                <!-- No Servers Message -->
+                <div id="no-servers" class="text-center py-12 hidden">
+                    <div class="text-6xl mb-4">🤖</div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Nenhum servidor encontrado</h3>
+                    <p class="text-white/60 mb-6">Você precisa ser administrador de um servidor para gerenciar a Lumi</p>
+                    <a href="https://discord.com/api/oauth2/authorize?client_id=YOUR_BOT_ID&permissions=8&scope=bot%20applications.commands" 
+                       target="_blank"
+                       class="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-8 py-4 rounded-xl hover:from-purple-600 hover:to-violet-600 transition-all inline-flex items-center">
+                        <i class="fas fa-plus mr-2"></i>
+                        Adicionar Lumi ao Servidor
+                    </a>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script>
+async function loadServers() {
+    try {
+        const response = await fetch('/api/guilds');
+        const data = await response.json();
+        
+        document.getElementById('loading').classList.add('hidden');
+        
+        if (data.success && data.guilds.length > 0) {
+            displayServers(data.guilds);
+        } else {
+            document.getElementById('no-servers').classList.remove('hidden');
+        }
+    } catch (error) {
+        console.error('Erro ao carregar servidores:', error);
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('no-servers').classList.remove('hidden');
+    }
+}
+
+function displayServers(guilds) {
+    const grid = document.getElementById('servers-grid');
+    grid.innerHTML = '';
+    
+    guilds.forEach(guild => {
+        const serverCard = createServerCard(guild);
+        grid.appendChild(serverCard);
+    });
+    
+    grid.classList.remove('hidden');
+}
+
+function createServerCard(guild) {
+    const div = document.createElement('div');
+    div.className = 'bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:border-purple-500/50 transition-all cursor-pointer';
+    
+    const iconUrl = guild.icon 
+        ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`
+        : '/images/lumi-avatar.png';
+    
+    div.innerHTML = `
+        <div class="flex items-center space-x-4 mb-4">
+            <img src="${iconUrl}" alt="${guild.name}" class="h-16 w-16 rounded-xl">
+            <div>
+                <h3 class="text-white font-bold text-lg">${guild.name}</h3>
+                <p class="text-white/60 text-sm">ID: ${guild.id}</p>
+            </div>
+        </div>
+        
+        <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs">
+                <i class="fas fa-check-circle mr-1"></i>
+                Ativa
+            </span>
+            <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-xs">
+                <i class="fas fa-crown mr-1"></i>
+                Admin
+            </span>
+        </div>
+        
+        <div class="flex space-x-2">
+            <button onclick="manageServer('${guild.id}')" 
+                    class="flex-1 bg-gradient-to-r from-purple-500 to-violet-500 text-white py-2 px-4 rounded-lg hover:from-purple-600 hover:to-violet-600 transition-all">
+                <i class="fas fa-cogs mr-2"></i>
+                Gerenciar
+            </button>
+            <button onclick="viewAnalytics('${guild.id}')" 
+                    class="bg-white/10 text-white py-2 px-4 rounded-lg hover:bg-white/20 transition-all">
+                <i class="fas fa-chart-bar"></i>
+            </button>
+        </div>
+    `;
+    
+    return div;
+}
+
+function manageServer(guildId) {
+    window.location.href = `/dashboard/server/${guildId}`;
+}
+
+function viewAnalytics(guildId) {
+    window.location.href = `/dashboard/server/${guildId}/analytics`;
+}
+
+function refreshServers() {
+    document.getElementById('servers-grid').classList.add('hidden');
+    document.getElementById('no-servers').classList.add('hidden');
+    document.getElementById('loading').classList.remove('hidden');
+    loadServers();
+}
+
+// Carregar servidores ao inicializar
+document.addEventListener('DOMContentLoaded', loadServers);
+</script>
