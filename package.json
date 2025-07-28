@@ -1,7 +1,11 @@
 {
   "name": "lumi-website-simple",
   "version": "1.0.0",
-  "main": "api/index.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "vercel-build": "echo 'No build step required'"
+  },
   "dependencies": {
     "express": "^4.18.2",
     "express-session": "^1.17.3",
@@ -9,5 +13,8 @@
     "passport-discord": "^0.1.4",
     "ejs": "^3.1.9",
     "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
