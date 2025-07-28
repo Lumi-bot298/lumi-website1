@@ -1,6 +1,6 @@
 {
   "name": "lumi-website",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Site oficial da Lumi - O Bot Discord Mais Avançado do Brasil",
   "main": "app.js",
   "scripts": {
@@ -17,7 +17,6 @@
     "passport-discord": "^0.1.4",
     "ejs": "^3.1.9",
     "dotenv": "^16.3.1",
-    "mercadopago": "^1.5.17",
     "compression": "^1.7.4",
     "helmet": "^7.0.0",
     "cors": "^2.8.5"
@@ -25,7 +24,7 @@
   "engines": {
     "node": ">=16.0.0"
   },
-  "keywords": ["discord", "bot", "lumi", "brasil", "oauth"],
+  "keywords": ["discord", "bot", "lumi", "brasil", "oauth", "serverless"],
   "author": "Guilherme Almeida (Dy. Black)",
   "license": "MIT"
 }
