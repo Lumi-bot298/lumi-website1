@@ -13,41 +13,63 @@ app.use(cors({ credentials: true, origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Session simples para serverless
+// Session configurada para Vercel serverless
 app.use(session({
   secret: process.env.SESSION_SECRET || 'lumi-secret-2025',
   resave: false,
   saveUninitialized: false,
+  name: 'lumi.sid',
   cookie: { 
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 24 * 60 * 60 * 1000 
+    secure: false, // Forçar false para debug
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000,
+    sameSite: 'lax'
   }
 }));
 
 // Cache simples para usuários
 const userCache = new Map();
 
-// Configurar Discord OAuth
+// Detectar ambiente automaticamente
+const isProduction = process.env.NODE_ENV === 'production';
+const baseURL = isProduction ? 'https://www.lumidiscord.xyz' : `https://${process.env.REPL_ID || 'ac9d1766-758d-46a5-a5d1-7c3902e58581-00-1pz0zvgkhy08i'}.kirk.replit.dev`;
+
+console.log('🔧 Configurando OAuth para:', baseURL);
+
+// Configurar Discord OAuth com detecção automática
 passport.use(new DiscordStrategy({
   clientID: process.env.DISCORD_CLIENT_ID,
   clientSecret: process.env.DISCORD_CLIENT_SECRET,
-  callbackURL: process.env.DISCORD_REDIRECT_URI || 'https://www.lumidiscord.xyz/auth/discord/callback',
-  scope: ['identify', 'email', 'guilds']
+  callbackURL: `${baseURL}/auth/discord/callback`,
+  scope: ['identify', 'email']
 }, (accessToken, refreshToken, profile, done) => {
+  console.log('🔍 Discord Strategy executada:', {
+    id: profile.id,
+    username: profile.username,
+    email: profile.email
+  });
+  
   const userData = {
     id: profile.id,
     username: profile.username,
     avatar: profile.avatar,
-    email: profile.email,
-    guilds: profile.guilds || []
+    email: profile.email
   };
+  
   userCache.set(profile.id, userData);
+  console.log('💾 Usuário salvo no cache:', userData.username);
   return done(null, userData);
 }));
 
-passport.serializeUser((user, done) => done(null, user.id));
+passport.serializeUser((user, done) => {
+  console.log('🔄 Serialize user:', user.username);
+  done(null, user.id);
+});
+
 passport.deserializeUser((id, done) => {
+  console.log('🔍 Deserialize user ID:', id);
   const user = userCache.get(id);
+  console.log('👤 User found in cache:', user ? user.username : 'NOT FOUND');
   done(null, user || false);
 });
 
@@ -66,23 +88,84 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'Lumi Website' });
 });
 
-// Auth routes
-app.get('/auth/discord', passport.authenticate('discord'));
-
-app.get('/auth/discord/callback', 
-  passport.authenticate('discord', { failureRedirect: '/oauth-error' }),
-  (req, res) => {
-    // Debug para verificar se callback está funcionando
-    console.log('✅ Discord OAuth callback executado com sucesso');
-    console.log('Usuário autenticado:', req.user?.username || 'Sem usuário');
-    
-    // Redirecionamento seguro para evitar loops
-    const redirectTo = req.session.returnTo || '/dashboard';
-    delete req.session.returnTo;
-    
-    res.redirect(redirectTo);
+// Middleware para detectar ambiente e redirecionar se necessário
+app.use('/auth/discord', (req, res, next) => {
+  const currentHost = req.get('host');
+  const isReplitHost = currentHost && currentHost.includes('replit.dev');
+  
+  console.log('🔍 Host atual:', currentHost);
+  console.log('🔍 É Replit?', isReplitHost);
+  
+  // Se estamos no Replit mas queremos produção, redirecionar
+  if (isReplitHost && process.env.REDIRECT_TO_PRODUCTION === 'true') {
+    console.log('🔄 Redirecionando para produção...');
+    return res.redirect(`https://www.lumidiscord.xyz${req.originalUrl}`);
   }
-);
+  
+  next();
+});
+
+// Auth routes com debug
+app.get('/auth/discord', (req, res, next) => {
+  console.log('🚀 Iniciando autenticação Discord');
+  console.log('Session ID:', req.sessionID);
+  console.log('Base URL configurado:', baseURL);
+  passport.authenticate('discord')(req, res, next);
+});
+
+app.get('/auth/discord/callback', (req, res, next) => {
+  console.log('📥 Recebendo callback do Discord');
+  console.log('Host:', req.get('host'));
+  console.log('Query params:', req.query);
+  
+  // Verificar se há erro no callback
+  if (req.query.error) {
+    console.log('❌ Discord retornou erro:', req.query.error);
+    return res.redirect(`/oauth-error?error=${req.query.error}&description=${req.query.error_description || ''}`);
+  }
+  
+  // Verificar se há código de autorização
+  if (!req.query.code) {
+    console.log('❌ Código de autorização não encontrado');
+    return res.redirect('/oauth-error?error=no_code');
+  }
+  
+  passport.authenticate('discord', { 
+    failureRedirect: '/oauth-error?error=passport_failed',
+    failureMessage: true 
+  }, (err, user, info) => {
+    console.log('🔍 Callback result:', { 
+      err: err?.message, 
+      user: user?.username, 
+      info 
+    });
+    
+    if (err) {
+      console.error('❌ Erro na autenticação:', err);
+      return res.redirect(`/oauth-error?error=auth_failed&details=${encodeURIComponent(err.message)}`);
+    }
+    
+    if (!user) {
+      console.error('❌ Usuário não encontrado');
+      return res.redirect('/oauth-error?error=no_user');
+    }
+    
+    req.logIn(user, (err) => {
+      if (err) {
+        console.error('❌ Erro no login:', err);
+        return res.redirect(`/oauth-error?error=login_failed&details=${encodeURIComponent(err.message)}`);
+      }
+      
+      console.log('✅ Login realizado com sucesso:', user.username);
+      
+      const redirectTo = req.session.returnTo || '/dashboard';
+      delete req.session.returnTo;
+      
+      console.log('🎯 Redirecionando para:', redirectTo);
+      res.redirect(redirectTo);
+    });
+  })(req, res, next);
+});
 
 app.get('/logout', (req, res) => {
   req.logout(() => res.redirect('/'));
