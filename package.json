@@ -4,19 +4,14 @@
   "description": "Painel Web oficial da Lumi - Bot Discord brasileiro com IA",
   "main": "app.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "node app.js",
+    "build": "echo 'Build complete'",
+    "start": "node app.js"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "next": "14.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-
     "express": "^4.18.2",
     "ejs": "^3.1.9",
     "express-session": "^1.17.3",
@@ -26,8 +21,9 @@
     "helmet": "^7.1.0",
     "compression": "^1.7.4",
     "express-rate-limit": "^7.1.5",
+    "morgan": "^1.10.0",
     "dotenv": "^16.3.1",
-    "mercadopago": "^1.5.17"
+    "mercadopago": "^2.0.15"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
