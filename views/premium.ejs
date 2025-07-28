@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium - Lumi</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0; 
+            padding: 20px; 
+            color: white; 
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; padding: 50px 0; }
+        .plans { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
+        .plan { 
+            background: rgba(255,255,255,0.1); 
+            padding: 40px; 
+            border-radius: 20px; 
+            text-align: center; 
+            min-width: 300px;
+            backdrop-filter: blur(10px);
+        }
+        .price { font-size: 3rem; color: #f1c40f; font-weight: bold; margin: 20px 0; }
+        .features { list-style: none; padding: 0; text-align: left; }
+        .features li { margin: 10px 0; }
+        .btn { 
+            display: inline-block; 
+            padding: 15px 30px; 
+            margin: 20px 0; 
+            background: #7289da; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 25px; 
+            border: none;
+            cursor: pointer;
+        }
+        .btn-premium { background: #f1c40f; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💎 Planos Premium</h1>
+            <a href="/" style="color: white;">← Voltar</a>
+        </div>
+        
+        <div class="plans">
+            <div class="plan">
+                <h3>🆓 Gratuito</h3>
+                <div class="price">R$ 0</div>
+                <ul class="features">
+                    <li>✅ Música do YouTube</li>
+                    <li>✅ Moderação completa</li>
+                    <li>✅ 90% das funcionalidades</li>
+                </ul>
+                <button class="btn">🚀 Ativo!</button>
+            </div>
+
+            <div class="plan">
+                <h3>⭐ Premium</h3>
+                <div class="price">R$ 9,90</div>
+                <ul class="features">
+                    <li>✅ Tudo do Gratuito</li>
+                    <li>🤖 IA Conversacional</li>
+                    <li>📊 Analytics Avançados</li>
+                </ul>
+                <button class="btn btn-premium">💳 Assinar</button>
+            </div>
+
+            <div class="plan">
+                <h3>♾️ Vitalício</h3>
+                <div class="price">R$ 79,90</div>
+                <ul class="features">
+                    <li>✅ Tudo do Premium</li>
+                    <li>🔥 Para sempre</li>
+                    <li>👑 Suporte VIP</li>
+                </ul>
+                <button class="btn">💎 Comprar</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

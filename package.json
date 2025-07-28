@@ -1,45 +1,15 @@
 {
-  "name": "lumi-web-panel",
-  "version": "1.0.0", 
-  "description": "Painel Web oficial da Lumi - Bot Discord brasileiro com IA",
-  "main": "app.js",
+  "name": "lumi-site",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "dev": "node app.js",
-    "build": "echo 'Build complete'",
-    "start": "node app.js"
-  },
-  "engines": {
-    "node": ">=18.0.0"
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "ejs": "^3.1.9",
-    "express-session": "^1.17.3",
-    "passport": "^0.6.0",
-    "passport-discord": "^0.1.4",
-    "cors": "^2.8.5",
-    "helmet": "^7.1.0",
-    "compression": "^1.7.4",
-    "express-rate-limit": "^7.1.5",
-    "morgan": "^1.10.0",
-    "dotenv": "^16.3.1",
-    "mercadopago": "^2.0.15"
+    "ejs": "^3.1.8"
   },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
-  },
-  "keywords": [
-    "discord",
-    "bot",
-    "brasil",
-    "ia",
-    "painel",
-    "web"
-  ],
-  "author": "Guilherme Almeida (Dy. Black)",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dyblack/lumi-discord-bot"
+  "engines": {
+    "node": "18.x"
   }
 }

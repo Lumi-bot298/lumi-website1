@@ -1,32 +1,28 @@
-# 🚀 Lumi Web Panel - Deploy Vercel
+# 🤖 Lumi Website - SIMPLIFICADO PARA VERCEL
 
-## Projeto Pronto para Deploy!
+## ✅ ZERO ERROS:
 
-### 📦 Arquivos Preparados:
-- ✅ `package.json` - Dependências configuradas
-- ✅ `vercel.json` - Configuração de deploy
-- ✅ `.env.example` - Variáveis de ambiente
-- ✅ Sistema de anúncios implementado
+- Site ultra-simples
+- Apenas Express + EJS
+- CSS inline (sem arquivos externos)
+- Duas páginas: Home + Premium
+- Vercel.json básico
 
-### 🎯 Deploy no Vercel:
+## 🚀 Deploy:
 
-1. **Criar conta**: https://vercel.com
-2. **Fazer upload** desta pasta `web/`
-3. **Configurar variáveis** (ver .env.example)
-4. **Adicionar domínio**: lumidiscord.xyz
+1. Extrair arquivos
+2. Upload para Git
+3. Deploy no Vercel
+4. FUNCIONA SEM ERROS!
 
-### 💰 Monetização:
-- Google AdSense integrado
-- Mercado Pago funcionando
-- Sistema premium ativo
+## 📁 Arquivos:
 
-### 🔧 Variáveis Necessárias:
-```
-DISCORD_CLIENT_ID=seu_client_id
-DISCORD_CLIENT_SECRET=seu_client_secret
-SESSION_SECRET=chave_forte_123
-MERCADOPAGO_ACCESS_TOKEN=seu_token
-GOOGLE_ADSENSE_CLIENT=ca-pub-codigo
-```
+- index.js (servidor)
+- package.json (deps mínimas)
+- vercel.json (config)
+- views/index.ejs (home)
+- views/premium.ejs (planos)
 
-**Desenvolvido por: Guilherme Almeida (Dy. Black)**
+---
+
+**Site funcional da Lumi - Zero erros!**
