@@ -3,37 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumi - Bot Discord</title>
+    <title><%= title %></title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 0; 
-            padding: 50px; 
-            color: white; 
-            text-align: center; 
-        }
-        .hero { padding: 100px 20px; }
+        body { font-family: Arial, sans-serif; margin: 0; background: linear-gradient(135deg, #667eea, #764ba2); color: white; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .hero { text-align: center; padding: 80px 0; }
         .hero h1 { font-size: 4rem; margin-bottom: 20px; }
-        .btn { 
-            display: inline-block; 
-            padding: 15px 30px; 
-            margin: 10px; 
-            background: #7289da; 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 25px; 
-        }
-        .btn-premium { background: #f1c40f; color: #333; }
+        .hero p { font-size: 1.5rem; margin-bottom: 30px; }
+        .btn { display: inline-block; padding: 15px 30px; margin: 10px; background: #f1c40f; color: #333; text-decoration: none; border-radius: 25px; font-weight: bold; }
+        .btn:hover { transform: translateY(-3px); }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
+        .feature { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; }
+        .feature h3 { color: #f1c40f; margin-bottom: 15px; }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <h1>🤖 Lumi</h1>
-        <p>O Bot Discord Mais Avançado do Brasil</p>
-        <p style="color: #f1c40f; font-weight: bold;">90% das funcionalidades GRATUITAS!</p>
-        <a href="/premium" class="btn btn-premium">💎 Ver Planos</a>
-        <a href="#" class="btn">🏠 Dashboard</a>
+    <div class="container">
+        <section class="hero">
+            <h1>🤖 Lumi</h1>
+            <p>O Bot Discord Mais Avançado do Brasil</p>
+            <p style="color: #f1c40f;">90% gratuito para sempre</p>
+            <button onclick="inviteBot()" class="btn">➕ Adicionar ao Discord</button>
+            <a href="/premium" class="btn">💎 Ver Premium</a>
+        </section>
+        
+        <section class="features">
+            <div class="feature">
+                <h3>🎵 Música Gratuita</h3>
+                <p>Sistema completo de música YouTube totalmente grátis. Diferente do MEE6 que cobra $12/mês.</p>
+            </div>
+            <div class="feature">
+                <h3>🛡️ Moderação</h3>
+                <p>Sistema avançado de moderação com auto-punições e filtros inteligentes.</p>
+            </div>
+            <div class="feature">
+                <h3>🤖 IA Real</h3>
+                <p>Primeira IA conversacional brasileira com análise de sentimentos.</p>
+            </div>
+        </section>
     </div>
+    
+    <script>
+        function inviteBot() {
+            window.open('https://discord.com/api/oauth2/authorize?client_id=1398433869212028938&permissions=8&scope=bot%20applications.commands', '_blank');
+        }
+    </script>
 </body>
 </html>

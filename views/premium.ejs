@@ -3,84 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium - Lumi</title>
+    <title><%= title %></title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 0; 
-            padding: 20px; 
-            color: white; 
-        }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .header { text-align: center; padding: 50px 0; }
-        .plans { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
-        .plan { 
-            background: rgba(255,255,255,0.1); 
-            padding: 40px; 
-            border-radius: 20px; 
-            text-align: center; 
-            min-width: 300px;
-            backdrop-filter: blur(10px);
-        }
-        .price { font-size: 3rem; color: #f1c40f; font-weight: bold; margin: 20px 0; }
-        .features { list-style: none; padding: 0; text-align: left; }
-        .features li { margin: 10px 0; }
-        .btn { 
-            display: inline-block; 
-            padding: 15px 30px; 
-            margin: 20px 0; 
-            background: #7289da; 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 25px; 
-            border: none;
-            cursor: pointer;
-        }
-        .btn-premium { background: #f1c40f; color: #333; }
+        body { font-family: Arial, sans-serif; margin: 0; background: linear-gradient(135deg, #667eea, #764ba2); color: white; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .hero { text-align: center; padding: 60px 0; }
+        .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 40px; }
+        .plan { background: rgba(255,255,255,0.1); padding: 40px; border-radius: 25px; text-align: center; }
+        .plan.popular { border: 2px solid #f1c40f; }
+        .plan h3 { font-size: 2rem; color: #f1c40f; margin-bottom: 20px; }
+        .price { font-size: 3rem; font-weight: bold; color: #f1c40f; margin: 20px 0; }
+        .btn { display: block; width: 100%; padding: 15px; margin-top: 20px; background: #f1c40f; color: #333; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; }
+        .btn:hover { transform: translateY(-2px); }
+        .features { list-style: none; text-align: left; padding: 0; }
+        .features li { margin: 10px 0; padding-left: 20px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <section class="hero">
             <h1>💎 Planos Premium</h1>
-            <a href="/" style="color: white;">← Voltar</a>
-        </div>
+            <p>Preços justos, recursos avançados</p>
+        </section>
         
         <div class="plans">
             <div class="plan">
                 <h3>🆓 Gratuito</h3>
                 <div class="price">R$ 0</div>
+                <p>Para sempre</p>
                 <ul class="features">
-                    <li>✅ Música do YouTube</li>
-                    <li>✅ Moderação completa</li>
+                    <li>✅ Música YouTube completa</li>
+                    <li>✅ Moderação avançada</li>
+                    <li>✅ Sistema de economia</li>
                     <li>✅ 90% das funcionalidades</li>
                 </ul>
-                <button class="btn">🚀 Ativo!</button>
+                <button onclick="inviteBot()" class="btn">➕ Adicionar Grátis</button>
             </div>
-
-            <div class="plan">
-                <h3>⭐ Premium</h3>
+            
+            <div class="plan popular">
+                <h3>💎 Premium</h3>
                 <div class="price">R$ 9,90</div>
+                <p>por mês</p>
                 <ul class="features">
-                    <li>✅ Tudo do Gratuito</li>
-                    <li>🤖 IA Conversacional</li>
-                    <li>📊 Analytics Avançados</li>
+                    <li>✅ Tudo do gratuito +</li>
+                    <li>🤖 IA conversacional</li>
+                    <li>📊 Analytics avançados</li>
+                    <li>👑 Suporte prioritário</li>
                 </ul>
-                <button class="btn btn-premium">💳 Assinar</button>
+                <button onclick="createPayment('premium')" class="btn">💳 Assinar Premium</button>
             </div>
-
+            
             <div class="plan">
                 <h3>♾️ Vitalício</h3>
                 <div class="price">R$ 79,90</div>
+                <p>pagamento único</p>
                 <ul class="features">
-                    <li>✅ Tudo do Premium</li>
-                    <li>🔥 Para sempre</li>
+                    <li>✅ Tudo do Premium +</li>
+                    <li>♾️ Acesso vitalício</li>
+                    <li>🎯 API personalizada</li>
                     <li>👑 Suporte VIP</li>
                 </ul>
-                <button class="btn">💎 Comprar</button>
+                <button onclick="createPayment('vitalicio')" class="btn">⚡ Comprar Vitalício</button>
             </div>
         </div>
     </div>
+    
+    <script>
+        function inviteBot() {
+            window.open('https://discord.com/api/oauth2/authorize?client_id=1398433869212028938&permissions=8&scope=bot%20applications.commands', '_blank');
+        }
+        
+        async function createPayment(plan) {
+            try {
+                const response = await fetch('/api/create-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ plan })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    alert('Redirecionando para pagamento...');
+                    // Aqui seria redirecionado para MercadoPago
+                    console.log('Payment data:', data);
+                }
+            } catch (error) {
+                alert('Erro no pagamento');
+            }
+        }
+    </script>
 </body>
 </html>
