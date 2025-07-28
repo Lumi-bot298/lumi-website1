@@ -8,9 +8,43 @@ const rateLimit = require('express-rate-limit');
 const compression = require('compression');
 const morgan = require('morgan');
 const path = require('path');
-const PaymentGatewayManager = require('./utils/paymentGateway');
-const I18nManager = require('./utils/i18n');
 require('dotenv').config();
+
+// Criar classes simplificadas para evitar dependências externas
+class PaymentGatewayManager {
+  constructor() {
+    this.gateways = ['mercadopago'];
+  }
+  
+  convertPrice(plan, currency = 'BRL') {
+    const prices = {
+      premium: { BRL: 9.90, USD: 1.99, EUR: 1.79 },
+      vitalicio: { BRL: 79.90, USD: 15.99, EUR: 14.99 }
+    };
+    return prices[plan]?.[currency] || prices[plan]?.BRL || 0;
+  }
+  
+  getAvailableGateways(country = 'BR') {
+    return country === 'BR' ? ['mercadopago'] : ['stripe'];
+  }
+}
+
+class I18nManager {
+  constructor() {
+    this.languages = ['pt-BR', 'en-US'];
+  }
+  
+  detectLanguage(req) {
+    return req.headers['accept-language']?.includes('pt') ? 'pt-BR' : 'en-US';
+  }
+  
+  t(key, lang = 'pt-BR') {
+    const translations = {
+      'pricing.title': lang === 'pt-BR' ? 'Preços' : 'Pricing'
+    };
+    return translations[key] || key;
+  }
+}
 
 // Configurar Mercado Pago diretamente
 process.env.MERCADOPAGO_ACCESS_TOKEN = 'APP_USR-5969941047594277-072320-3fc5aed7b0ad7b2151d05821111b6c72-661679798';
@@ -162,7 +196,7 @@ const configurePassport = () => {
   passport.use(new DiscordStrategy({
     clientID: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    callbackURL: process.env.DISCORD_REDIRECT_URI || 'https://lumi-website1.vercel.app/auth/discord/callback', // URL para Vercel
+    callbackURL: process.env.DISCORD_REDIRECT_URI || 'https://www.lumidiscord.xyz/auth/discord/callback', // URL padrão
     scope: ['identify', 'email', 'guilds']
   }, async (accessToken, refreshToken, profile, done) => {
   try {
