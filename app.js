@@ -162,7 +162,7 @@ const configurePassport = () => {
   passport.use(new DiscordStrategy({
     clientID: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    callbackURL: 'https://ac9d1766-758d-46a5-a5d1-7c3902e58581-00-1pz0zvgkhy08i.kirk.replit.dev/auth/discord/callback', // URL funcional do Replit
+    callbackURL: process.env.DISCORD_REDIRECT_URI || 'https://lumi-website1.vercel.app/auth/discord/callback', // URL para Vercel
     scope: ['identify', 'email', 'guilds']
   }, async (accessToken, refreshToken, profile, done) => {
   try {
