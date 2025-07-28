@@ -105,7 +105,7 @@
                 <i class="fab fa-discord"></i>
                 Adicionar ao Discord
             </a>
-            <a href="/premium/demo" class="btn-secondary">
+            <a href="/demo" class="btn-secondary">
                 Ver Demo Interativa
             </a>
         </div>
@@ -365,7 +365,7 @@
             <div>
                 <h3>Recursos</h3>
                 <ul>
-                    <li><a href="/premium/demo">Demo Interativa</a></li>
+                    <li><a href="/demo">Demo Interativa</a></li>
                     <li><a href="/premium/plans">Planos Premium</a></li>
                 </ul>
             </div>
@@ -373,16 +373,16 @@
             <div>
                 <h3>Suporte</h3>
                 <ul>
-                    <li><a href="https://discord.gg/lumi">Discord</a></li>
-                    <li><a href="mailto:suporte@lumibot.com.br">Email</a></li>
+                    <li><a href="#" onclick="showDiscordInfo()">Discord</a></li>
+                    <li><a href="#" onclick="showEmailInfo()">Email</a></li>
                 </ul>
             </div>
             
             <div>
                 <h3>Legal</h3>
                 <ul>
-                    <li><a href="/privacy">Privacidade</a></li>
-                    <li><a href="/terms">Termos de Uso</a></li>
+                    <li><a href="/privacidade">Privacidade</a></li>
+                    <li><a href="/termos">Termos de Uso</a></li>
                 </ul>
             </div>
         </div>
@@ -397,6 +397,160 @@
         </p>
     </div>
 </footer>
+
+
+<!-- Modais para Suporte -->
+<div id="discordModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('discordModal')">&times;</span>
+        <h3><i class="fab fa-discord"></i> Suporte Discord</h3>
+        <p>🚧 <strong>Servidor em construção</strong></p>
+        <p>Para receber suporte técnico, entre em contato diretamente com o desenvolvedor da Lumi:</p>
+        <div class="contact-card">
+            <img src="/images/lumi-avatar.png" alt="Lumi" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+            <div>
+                <strong>Guilherme Almeida (Dy. Black)</strong><br>
+                <span style="color: #7289da;">Discord: almeida_.7</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="emailModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('emailModal')">&times;</span>
+        <h3><i class="fas fa-envelope"></i> Contato por Email</h3>
+        <p>Entre em contato conosco através do nosso email oficial:</p>
+        <div class="email-card">
+            <div class="email-info">
+                <strong>Email Oficial da Lumi:</strong><br>
+                <a href="mailto:lumidiscord@gmail.com" class="email-link">
+                    <i class="fas fa-envelope"></i> lumidiscord@gmail.com
+                </a>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">
+                Resposta em até 24 horas • Suporte em português
+            </p>
+        </div>
+        <button onclick="copyEmail()" class="copy-btn">
+            <i class="fas fa-copy"></i> Copiar Email
+        </button>
+    </div>
+</div>
+
+<style>
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #2D1B69, #7B2CBF);
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    position: relative;
+}
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.close:hover {
+    opacity: 0.7;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.email-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.email-link {
+    color: #C77DFF;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.email-link:hover {
+    color: #9D4EDD;
+}
+
+.copy-btn {
+    background: linear-gradient(135deg, #7B2CBF, #9D4EDD);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.copy-btn:hover {
+    transform: scale(1.05);
+}
+</style>
+
+<script>
+function showDiscordInfo() {
+    document.getElementById('discordModal').style.display = 'block';
+}
+
+function showEmailInfo() {
+    document.getElementById('emailModal').style.display = 'block';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+function copyEmail() {
+    navigator.clipboard.writeText('lumidiscord@gmail.com').then(function() {
+        alert('Email copiado para a área de transferência!');
+    });
+}
+
+// Fechar modal clicando fora
+window.onclick = function(event) {
+    const modals = ['discordModal', 'emailModal'];
+    modals.forEach(modalId => {
+        const modal = document.getElementById(modalId);
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+</script>
 
 </body>
 </html>

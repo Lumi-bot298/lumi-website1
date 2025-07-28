@@ -261,6 +261,36 @@ app.get('/docs', (req, res) => {
   });
 });
 
+// Novas rotas para páginas legais
+app.get('/privacidade', (req, res) => {
+  res.render('legal/privacidade', { 
+    title: 'Política de Privacidade - Lumi',
+    user: req.user || null
+  });
+});
+
+app.get('/termos', (req, res) => {
+  res.render('legal/termos', { 
+    title: 'Termos de Uso - Lumi',
+    user: req.user || null
+  });
+});
+
+// Rota para demo interativa
+app.get('/demo', (req, res) => {
+  res.render('premium/demo', { 
+    title: 'Demo Interativa - Lumi',
+    user: req.user || null
+  });
+});
+
+// Rota para adicionar bot ao Discord
+app.get('/invite', (req, res) => {
+  // URL oficial do bot Discord da Lumi
+  const botInviteUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&permissions=8&scope=bot%20applications.commands`;
+  res.redirect(botInviteUrl);
+});
+
 // Error handlers
 app.get('/oauth-error', (req, res) => {
   res.render('oauth-error', { 
