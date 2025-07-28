@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Premium - Lumi</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/lumi-avatar.png?v=6">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0F0B19 0%, #2D1B69 50%, #7B2CBF 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .nav-links a.active {
+            color: #E0AAFF;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+        }
+        
+        .header-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .header-section h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #E0AAFF, #C77DFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header-section .crown-icon {
+            color: #FFD700;
+            margin-right: 12px;
+            font-size: 40px;
+        }
+        
+        .header-section p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Demo Features Grid */
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(123, 44, 191, 0.3);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #7B2CBF, #E0AAFF);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: white;
+        }
+        
+        .feature-list {
+            list-style: none;
+            text-align: left;
+            margin-top: 20px;
+        }
+        
+        .feature-list li {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .feature-list i.fas.fa-check {
+            color: #10B981;
+            font-size: 14px;
+        }
+        
+        /* Demo Action Section */
+        .demo-action {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 48px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .demo-action h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: white;
+        }
+        
+        .demo-action p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+        
+        .demo-btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255, 215, 0, 0.3);
+        }
+        
+        .demo-disclaimer {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 16px;
+        }
+        
+        /* Interactive Features */
+        .interactive-demo {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+        }
+        
+        .interactive-demo h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #E0AAFF;
+            text-align: center;
+        }
+        
+        .demo-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        
+        .demo-button {
+            background: rgba(123, 44, 191, 0.2);
+            border: 1px solid rgba(123, 44, 191, 0.3);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .demo-button:hover {
+            background: rgba(123, 44, 191, 0.3);
+            border-color: rgba(123, 44, 191, 0.5);
+        }
+        
+        .demo-result {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            color: #C77DFF;
+            display: none;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+        
+        .footer p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer a {
+            color: #E0AAFF;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .nav-links {
+                gap: 16px;
+            }
+            
+            .header-section h1 {
+                font-size: 36px;
+            }
+            
+            .demo-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-action {
+                padding: 32px 24px;
+            }
+            
+            .demo-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <img src="/images/lumi-avatar.png" alt="Lumi">
+                    <span>Lumi</span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="/">Início</a>
+                    <a href="/premium/plans">Premium</a>
+                    <a href="/demo" class="active">Demo</a>
+                    <a href="/support">Suporte</a>
+                    <a href="/dashboard">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header Section -->
+            <section class="header-section">
+                <h1>
+                    <i class="fas fa-crown crown-icon"></i>
+                    Demo Premium Lumi
+                </h1>
+                <p>Experimente todos os recursos premium gratuitamente por 7 dias</p>
+            </section>
+
+            <!-- Demo Features -->
+            <div class="demo-features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>IA Avançada</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Conversas ilimitadas em português</li>
+                        <li><i class="fas fa-check"></i>Análise de sentimentos em tempo real</li>
+                        <li><i class="fas fa-check"></i>Aprendizado contínuo personalizado</li>
+                        <li><i class="fas fa-check"></i>Respostas contextuais inteligentes</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Música Premium</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>YouTube real sem limitações</li>
+                        <li><i class="fas fa-check"></i>Controles interativos com botões</li>
+                        <li><i class="fas fa-check"></i>Playlists automáticas inteligentes</li>
+                        <li><i class="fas fa-check"></i>Qualidade de áudio superior</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics Avançados</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Dados autênticos em tempo real</li>
+                        <li><i class="fas fa-check"></i>Métricas detalhadas de engajamento</li>
+                        <li><i class="fas fa-check"></i>Relatórios personalizados</li>
+                        <li><i class="fas fa-check"></i>Insights de crescimento do servidor</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Interactive Demo -->
+            <div class="interactive-demo">
+                <h3>Teste os Recursos Agora</h3>
+                <p style="text-align: center; color: rgba(255, 255, 255, 0.7); margin-bottom: 20px;">
+                    Clique nos botões abaixo para simular comandos premium da Lumi:
+                </p>
+                
+                <div class="demo-buttons">
+                    <button class="demo-button" onclick="simulateCommand('ia')">
+                        <i class="fas fa-brain"></i> Testar IA Premium
+                    </button>
+                    <button class="demo-button" onclick="simulateCommand('analytics')">
+                        <i class="fas fa-chart-line"></i> Ver Analytics
+                    </button>
+                    <button class="demo-button" onclick="simulateCommand('musica')">
+                        <i class="fas fa-music"></i> Música Premium
+                    </button>
+                    <button class="demo-button" onclick="simulateCommand('personalizacao')">
+                        <i class="fas fa-palette"></i> Personalização
+                    </button>
+                </div>
+                
+                <div id="demo-result" class="demo-result"></div>
+            </div>
+
+            <!-- Demo Action -->
+            <div class="demo-action">
+                <h2>Ative o Demo Premium</h2>
+                <p>Teste todos os recursos premium da Lumi por 7 dias gratuitamente. Sem cartão de crédito, sem compromisso.</p>
+                
+                <button id="demo-btn" class="demo-btn">
+                    <i class="fas fa-star"></i>
+                    Ativar Demo Premium Grátis
+                </button>
+                
+                <div class="demo-disclaimer">
+                    * Não requer cartão de crédito<br>
+                    * Cancelamento automático após 7 dias<br>
+                    * Acesso completo a todos os recursos premium
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px;">
+                <img src="/images/lumi-avatar.png" alt="Lumi" style="width: 32px; height: 32px; border-radius: 50%;">
+                <span style="font-size: 20px; font-weight: 700;">Lumi</span>
+            </div>
+            <p>
+                © 2025 Lumi Bot. Desenvolvido por 
+                <a href="https://github.com/dyblack">Guilherme Almeida (Dy. Black)</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 DOM carregado, inicializando scripts...');
+            
+            // Add event listener to demo button
+            const demoBtn = document.getElementById('demo-btn');
+            if (demoBtn) {
+                console.log('✅ Botão demo encontrado, adicionando evento...');
+                demoBtn.addEventListener('click', activateDemo);
+            } else {
+                console.error('❌ Botão demo não encontrado!');
+            }
+        });
+
+        function simulateCommand(type) {
+            const resultDiv = document.getElementById('demo-result');
+            resultDiv.style.display = 'block';
+            
+            const responses = {
+                'ia': `🤖 IA Premium Lumi respondeu:
+"Olá! Sou a versão premium da IA da Lumi. Posso:
+✅ Manter conversas longas e contextuais
+✅ Analisar sentimentos em tempo real
+✅ Aprender com as interações do servidor
+✅ Fornecer respostas mais inteligentes e personalizadas
+
+Pergunte-me qualquer coisa em português!"`,
+                
+                'analytics': `📊 Analytics Premium - Servidor Demo:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📈 Membros Ativos: 847 (+23 hoje)
+💬 Mensagens: 12,450 (↑15% esta semana)
+🎯 Comandos Executados: 1,089 (!musica: 45%)
+⭐ Engajamento: 89% (Excelente!)
+🔥 Canal Mais Ativo: #geral (2,340 msgs)
+⏰ Horário de Pico: 20:00-22:00`,
+                
+                'musica': `🎵 Sistema de Música Premium:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎶 Tocando: "Lofi Hip Hop Mix - 1 hora"
+👥 Ouvintes: 12 membros conectados
+📱 Controles: [⏸️ Pausar] [⏭️ Próxima] [🔀 Aleatório]
+📋 Fila: 8 músicas | Tempo restante: 47:23
+🎚️ Volume: 75% | Qualidade: Premium HD
+🎯 Auto-DJ: Ativado (adiciona músicas similares)`,
+                
+                'personalizacao': `🎨 Personalização Premium:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌈 Tema Ativo: Oceano (Azul/Turquesa)
+🎯 Prefixo Personalizado: "!"
+🔔 Notificações: Personalizadas ativadas
+🎪 Mensagens de Boas-vindas: Template premium
+⚡ Auto-configuração: 97% concluída
+🎭 Interface: Modo escuro com acentos roxos`
+            };
+            
+            resultDiv.innerHTML = responses[type];
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        async function activateDemo(event) {
+            console.log('🎯 Função activateDemo chamada!');
+            
+            try {
+                const button = event.target;
+                const originalText = button.innerHTML;
+                
+                console.log('📍 Botão clicado:', button);
+                
+                // Update button state
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Ativando...';
+                button.disabled = true;
+                
+                console.log('📡 Fazendo chamada para /api/activate-demo...');
+                
+                // Call the API endpoint
+                const response = await fetch('/api/activate-demo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                console.log('📥 Status da resposta:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('📊 Dados da API:', data);
+                
+                if (data.success) {
+                    // Show success message
+                    const featuresText = data.features.join('\n✅ ');
+                    const message = `🎉 Demo Premium ativado com sucesso!\n\n✅ ${featuresText}\n\n⏰ Válido até: ${new Date(data.demoExpiresAt).toLocaleDateString('pt-BR')}\n\nRedirecionando para o dashboard...`;
+                    
+                    alert(message);
+                    
+                    // Redirect after delay
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 2000);
+                    
+                } else {
+                    throw new Error(data.error || 'Erro desconhecido da API');
+                }
+                
+            } catch (error) {
+                console.error('❌ Erro completo:', error);
+                alert('❌ Erro: ' + error.message);
+                
+                // Reset button
+                const button = document.getElementById('demo-btn');
+                if (button) {
+                    button.innerHTML = '<i class="fas fa-star"></i> Ativar Demo Premium Grátis';
+                    button.disabled = false;
+                }
+            }
+        }
+
+        // Backup function for manual testing
+        window.testDemo = function() {
+            console.log('🧪 Testando demo manualmente...');
+            activateDemo({ target: document.getElementById('demo-btn') });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Realizado - Lumi</title>
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .success-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .success-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+        
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+        }
+        
+        .demo-badge {
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid #fbbf24;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            color: #fbbf24;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../layout') %>
+
+    <div class="success-container">
+        <div class="success-card">
+            <% if (demo) { %>
+                <div class="demo-badge">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    DEMONSTRAÇÃO
+                </div>
+            <% } %>
+            
+            <div class="success-icon">
+                <i class="fas fa-check text-white text-4xl"></i>
+            </div>
+            
+            <h1 class="text-3xl font-bold text-white mb-4">
+                <% if (demo) { %>
+                    Demo de Pagamento Concluída!
+                <% } else { %>
+                    Pagamento Realizado com Sucesso!
+                <% } %>
+            </h1>
+            
+            <p class="text-white/80 text-lg mb-6">
+                <% if (demo) { %>
+                    Você testou o sistema de pagamento demo. Em produção, os recursos premium seriam ativados automaticamente.
+                <% } else { %>
+                    Seu plano premium foi ativado! Agora você tem acesso a todos os recursos exclusivos da Lumi.
+                <% } %>
+            </p>
+
+            <% if (method) { %>
+                <div class="bg-white/5 rounded-lg p-4 mb-6">
+                    <p class="text-white/70">
+                        <i class="fas fa-credit-card mr-2"></i>
+                        Método de pagamento: <span class="font-bold text-white"><%= method.toUpperCase() %></span>
+                    </p>
+                </div>
+            <% } %>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-white/5 rounded-lg p-4">
+                    <i class="fas fa-robot text-purple-400 text-2xl mb-2"></i>
+                    <h3 class="font-bold text-white">IA Avançada</h3>
+                    <p class="text-white/60 text-sm">Ativada</p>
+                </div>
+                
+                <div class="bg-white/5 rounded-lg p-4">
+                    <i class="fas fa-chart-line text-green-400 text-2xl mb-2"></i>
+                    <h3 class="font-bold text-white">Analytics</h3>
+                    <p class="text-white/60 text-sm">Liberado</p>
+                </div>
+                
+                <div class="bg-white/5 rounded-lg p-4">
+                    <i class="fas fa-music text-blue-400 text-2xl mb-2"></i>
+                    <h3 class="font-bold text-white">Música Premium</h3>
+                    <p class="text-white/60 text-sm">Disponível</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/dashboard" class="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-8 py-3 rounded-xl hover:from-purple-600 hover:to-violet-600 transition-all font-semibold">
+                    <i class="fas fa-tachometer-alt mr-2"></i>
+                    Ir para Dashboard
+                </a>
+                
+                <a href="/premium/manage" class="bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-xl backdrop-blur-lg border border-white/20 transition-all font-semibold">
+                    <i class="fas fa-cog mr-2"></i>
+                    Gerenciar Assinatura
+                </a>
+            </div>
+            
+            <div class="mt-8 text-white/60 text-sm">
+                <p>
+                    <i class="fas fa-headset mr-2"></i>
+                    Dúvidas? <a href="/support" class="text-purple-300 hover:text-purple-200">Entre em contato</a> com nosso suporte premium
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

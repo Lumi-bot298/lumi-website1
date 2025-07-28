@@ -1,0 +1,181 @@
+<!-- Seletor de Idioma -->
+<div class="language-selector">
+    <div class="language-dropdown">
+        <button class="language-btn" onclick="toggleLanguageMenu()">
+            <i class="fas fa-globe"></i>
+            <span class="current-language"><%= getLanguageName(locale) %></span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        
+        <div class="language-menu" id="languageMenu">
+            <a href="javascript:void(0)" onclick="changeLanguage('pt-BR')" class="language-option <%= locale === 'pt-BR' ? 'active' : '' %>">
+                <img src="/images/flags/br.svg" alt="Português" class="flag-icon">
+                <span>Português (BR)</span>
+            </a>
+            
+            <a href="javascript:void(0)" onclick="changeLanguage('en-US')" class="language-option <%= locale === 'en-US' ? 'active' : '' %>">
+                <img src="/images/flags/us.svg" alt="English" class="flag-icon">
+                <span>English (US)</span>
+            </a>
+            
+            <a href="javascript:void(0)" onclick="changeLanguage('es-ES')" class="language-option <%= locale === 'es-ES' ? 'active' : '' %>">
+                <img src="/images/flags/es.svg" alt="Español" class="flag-icon">
+                <span>Español (ES)</span>
+            </a>
+            
+            <a href="javascript:void(0)" onclick="changeLanguage('fr-FR')" class="language-option <%= locale === 'fr-FR' ? 'active' : '' %>">
+                <img src="/images/flags/fr.svg" alt="Français" class="flag-icon">
+                <span>Français (FR)</span>
+            </a>
+            
+            <a href="javascript:void(0)" onclick="changeLanguage('de-DE')" class="language-option <%= locale === 'de-DE' ? 'active' : '' %>">
+                <img src="/images/flags/de.svg" alt="Deutsch" class="flag-icon">
+                <span>Deutsch (DE)</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+.language-selector {
+    position: relative;
+    display: inline-block;
+}
+
+.language-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.language-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.language-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 8px 0;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.language-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: background 0.3s ease;
+    font-size: 14px;
+}
+
+.language-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.language-option.active {
+    background: rgba(123, 44, 191, 0.3);
+    color: white;
+}
+
+.flag-icon {
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
+    object-fit: cover;
+}
+
+.current-language {
+    font-weight: 500;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .language-menu {
+        right: -20px;
+        left: -20px;
+        min-width: auto;
+    }
+}
+</style>
+
+<script>
+// Funções do seletor de idioma
+function toggleLanguageMenu() {
+    const menu = document.getElementById('languageMenu');
+    menu.classList.toggle('show');
+}
+
+function changeLanguage(locale) {
+    // Fechar menu
+    document.getElementById('languageMenu').classList.remove('show');
+    
+    // Salvar preferência no localStorage
+    localStorage.setItem('preferred_language', locale);
+    
+    // Redirecionar com parâmetro de idioma
+    const currentUrl = new URL(window.location);
+    currentUrl.searchParams.set('lang', locale);
+    window.location.href = currentUrl.toString();
+}
+
+function getLanguageName(locale) {
+    const names = {
+        'pt-BR': 'Português',
+        'en-US': 'English', 
+        'es-ES': 'Español',
+        'fr-FR': 'Français',
+        'de-DE': 'Deutsch'
+    };
+    return names[locale] || 'Português';
+}
+
+// Fechar menu ao clicar fora
+document.addEventListener('click', function(event) {
+    const selector = document.querySelector('.language-selector');
+    if (!selector.contains(event.target)) {
+        document.getElementById('languageMenu').classList.remove('show');
+    }
+});
+
+// Detectar idioma preferido na primeira visita
+window.addEventListener('DOMContentLoaded', function() {
+    const preferredLang = localStorage.getItem('preferred_language');
+    const currentLang = '<%= locale %>';
+    
+    if (preferredLang && preferredLang !== currentLang) {
+        const currentUrl = new URL(window.location);
+        if (!currentUrl.searchParams.has('lang')) {
+            currentUrl.searchParams.set('lang', preferredLang);
+            window.location.replace(currentUrl.toString());
+        }
+    }
+});
+</script>

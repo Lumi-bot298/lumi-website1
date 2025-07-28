@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise - Lumi</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/lumi-avatar.png?v=6">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0F0B19 0%, #2D1B69 50%, #7B2CBF 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .backdrop-blur-lg {
+            backdrop-filter: blur(16px);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/" class="flex items-center space-x-3">
+                <img src="/images/lumi-avatar.png" alt="Lumi" class="w-10 h-10 rounded-full">
+                <span class="text-2xl font-bold text-white">Lumi</span>
+            </a>
+            
+            <div class="flex items-center space-x-6">
+                <a href="/" class="text-white/80 hover:text-white transition-colors">Início</a>
+                <a href="/premium/plans" class="text-white/80 hover:text-white transition-colors">Planos</a>
+                <% if (user) { %>
+                    <a href="/dashboard" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        Dashboard
+                    </a>
+                <% } else { %>
+                    <a href="/auth/discord" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        <i class="fab fa-discord mr-2"></i>Login
+                    </a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-16 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full mb-8">
+                <i class="fas fa-crown text-white text-2xl"></i>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+                Lumi Enterprise
+            </h1>
+            <p class="text-xl text-white/80 max-w-3xl mx-auto mb-8">
+                Para grandes comunidades que precisam do máximo em recursos, suporte e personalização
+            </p>
+            <div class="text-6xl font-bold text-white mb-4">
+                R$ 45<span class="text-2xl text-white/70">/mês</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-robot text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">IA Personalizada Exclusiva</h3>
+                    <p class="text-white/70">Sistema de IA treinado especificamente para seu servidor, com personalidade única e conhecimento específico da sua comunidade.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-infinity text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Analytics Ilimitados</h3>
+                    <p class="text-white/70">Histórico completo de dados, API de acesso, relatórios avançados e integração com ferramentas de terceiros.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-clock text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Suporte 24/7 Dedicado</h3>
+                    <p class="text-white/70">Linha direta com o desenvolvedor, resposta em menos de 30 minutos, suporte via call quando necessário.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-rocket text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Consultoria de Crescimento</h3>
+                    <p class="text-white/70">Estratégias personalizadas para expandir sua comunidade, análise de engajamento e recomendações de growth.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-cog text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Recursos Personalizados</h3>
+                    <p class="text-white/70">Comandos exclusivos desenvolvidos sob demanda, integração com sistemas específicos do seu servidor.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Backup Prioritário</h3>
+                    <p class="text-white/70">Backups automáticos diários, recuperação instantânea, migração assistida entre servidores.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="py-16 bg-black/20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-white text-center mb-12">Por que escolher Enterprise?</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="glass-card rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-white mb-6">Lumi Pro</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-white/80">IA Avançada com Memória</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-white/80">Analytics de 30 Dias</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-white/80">15+ Temas Premium</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-white/80">Suporte VIP < 2h</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 border-2 border-yellow-500/50">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-bold text-white">Lumi Enterprise</h3>
+                        <span class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">RECOMENDADO</span>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-crown text-yellow-400"></i>
+                            <span class="text-white">Tudo do Pro +</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-robot text-purple-400"></i>
+                            <span class="text-white">IA Personalizada Exclusiva</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-infinity text-blue-400"></i>
+                            <span class="text-white">Analytics Ilimitados</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-headset text-green-400"></i>
+                            <span class="text-white">Suporte 24/7 Dedicado</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-rocket text-orange-400"></i>
+                            <span class="text-white">Consultoria de Crescimento</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-cog text-gray-400"></i>
+                            <span class="text-white">Recursos Personalizados</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">Pronto para elevar sua comunidade?</h2>
+            <p class="text-xl text-white/80 mb-8">
+                Junte-se às comunidades que escolheram o melhor. Suporte brasileiro de qualidade mundial.
+            </p>
+            
+            <button onclick="upgradeToEnterprise()" class="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-xl transition-all transform hover:scale-105 shadow-lg">
+                <i class="fas fa-crown mr-2"></i>
+                Escolher Enterprise - R$ 45/mês
+            </button>
+            
+            <div class="mt-6">
+                <p class="text-white/60">
+                    <i class="fas fa-shield-alt text-green-400 mr-2"></i>
+                    Garantia de 7 dias ou seu dinheiro de volta
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Processing Modal -->
+    <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-lg hidden items-center justify-center z-50">
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 max-w-md w-full mx-4 border border-white/20">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-crown text-white text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Processando Upgrade</h3>
+                <p class="text-white/70 mb-6">Redirecionando para o checkout Enterprise...</p>
+                <div class="flex justify-center">
+                    <div class="animate-spin w-8 h-8 border-4 border-yellow-500 border-t-transparent rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPaymentModal() {
+            document.getElementById('paymentModal').classList.remove('hidden');
+            document.getElementById('paymentModal').classList.add('flex');
+        }
+
+        function hidePaymentModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+            document.getElementById('paymentModal').classList.remove('flex');
+        }
+
+        async function upgradeToEnterprise() {
+            <% if (!user) { %>
+                window.location.href = '/auth/discord';
+                return;
+            <% } %>
+            
+            showPaymentModal();
+            
+            try {
+                // Redirect para API de checkout
+                window.location.href = '/api/create-checkout-session?plan=enterprise';
+            } catch (error) {
+                console.error('Erro ao processar checkout:', error);
+                hidePaymentModal();
+                alert('Erro ao processar pagamento. Tente novamente.');
+            }
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex justify-center items-center space-x-3 mb-4">
+                    <img src="/images/lumi-avatar.png" alt="Lumi" class="w-8 h-8 rounded-full">
+                    <span class="text-xl font-bold text-white">Lumi</span>
+                </div>
+                <p class="text-white/60">
+                    © 2025 Lumi Bot. Desenvolvido por 
+                    <a href="https://github.com/dyblack" class="text-purple-400 hover:text-purple-300">
+                        Guilherme Almeida (Dy. Black)
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .manage-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        
+        .subscription-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .status-active {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid #10b981;
+        }
+        
+        .status-demo {
+            background: rgba(124, 58, 237, 0.2);
+            color: #7c3aed;
+            border: 1px solid #7c3aed;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #f87171);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li i {
+            color: #10b981;
+            margin-right: 0.5rem;
+            width: 16px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../layout') %>
+
+    <div class="manage-container">
+        <div class="text-center">
+            <h1>Gerenciar Assinatura</h1>
+            <p class="lead">Controle sua assinatura Premium da Lumi</p>
+        </div>
+
+        <!-- Status da Assinatura -->
+        <div class="subscription-card">
+            <h2>Status da Assinatura</h2>
+            <span class="status-badge status-demo">Demo Premium Ativo</span>
+            
+            <div style="margin: 1rem 0;">
+                <strong>Plano Atual:</strong> Demo Premium (7 dias)<br>
+                <strong>Expira em:</strong> <span id="expiry-date">31/07/2025</span><br>
+                <strong>Próximo Pagamento:</strong> Não aplicável
+            </div>
+
+            <h3>Recursos Ativos:</h3>
+            <ul class="feature-list">
+                <li><i class="fas fa-check"></i> IA Avançada Premium</li>
+                <li><i class="fas fa-check"></i> Analytics Detalhados</li>
+                <li><i class="fas fa-check"></i> Música Premium</li>
+                <li><i class="fas fa-check"></i> Personalização Completa</li>
+                <li><i class="fas fa-check"></i> Suporte VIP</li>
+            </ul>
+
+            <div class="action-buttons">
+                <a href="/premium/plans" class="btn btn-primary">
+                    <i class="fas fa-crown"></i> Assinar Plano Pro
+                </a>
+                <a href="/premium/compare" class="btn btn-secondary">
+                    <i class="fas fa-chart-bar"></i> Comparar Planos
+                </a>
+            </div>
+        </div>
+
+        <!-- Histórico de Pagamentos -->
+        <div class="subscription-card">
+            <h2>Histórico de Pagamentos</h2>
+            <p style="color: #9ca3af;">Nenhum pagamento realizado ainda. Você está usando o demo gratuito.</p>
+            
+            <div class="action-buttons">
+                <a href="/premium/plans" class="btn btn-primary">
+                    <i class="fas fa-credit-card"></i> Realizar Primeiro Pagamento
+                </a>
+            </div>
+        </div>
+
+        <!-- Configurações -->
+        <div class="subscription-card">
+            <h2>Configurações</h2>
+            
+            <div style="margin: 1rem 0;">
+                <strong>Email de Cobrança:</strong> <%= user.email || 'Não informado' %><br>
+                <strong>ID do Usuário:</strong> <%= user.id %>
+            </div>
+
+            <div class="action-buttons">
+                <a href="/support" class="btn btn-secondary">
+                    <i class="fas fa-headset"></i> Entrar em Contato
+                </a>
+                <button class="btn btn-danger" onclick="cancelDemo()">
+                    <i class="fas fa-times"></i> Cancelar Demo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function cancelDemo() {
+            if (confirm('Tem certeza que deseja cancelar o demo premium? Você perderá acesso aos recursos premium imediatamente.')) {
+                // Implementar cancelamento do demo
+                alert('Demo cancelado com sucesso. Você foi redirecionado para os planos.');
+                window.location.href = '/premium/plans';
+            }
+        }
+
+        // Atualizar data de expiração dinamicamente
+        const expiryElement = document.getElementById('expiry-date');
+        if (expiryElement) {
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + 7); // 7 dias a partir de hoje
+            expiryElement.textContent = expiryDate.toLocaleDateString('pt-BR');
+        }
+    </script>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

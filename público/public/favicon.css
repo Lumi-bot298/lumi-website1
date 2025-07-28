@@ -1,0 +1,8 @@
+/* Aplicar bordas arredondadas ao favicon via CSS */
+link[rel="icon"] {
+    border-radius: 6px;
+}
+
+link[rel="shortcut icon"] {
+    border-radius: 6px;
+}

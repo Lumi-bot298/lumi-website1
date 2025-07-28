@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação - Lumi</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/lumi-avatar.png?v=6">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0F0B19 0%, #2D1B69 50%, #7B2CBF 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .nav-links a.active {
+            color: #E0AAFF;
+        }
+        
+        /* Layout */
+        .docs-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            padding: 40px 0;
+            min-height: calc(100vh - 200px);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            height: fit-content;
+            position: sticky;
+            top: 40px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .sidebar h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #E0AAFF;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 8px;
+        }
+        
+        .sidebar a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .sidebar a:hover, .sidebar a.active {
+            background: rgba(123, 44, 191, 0.2);
+            color: white;
+        }
+        
+        /* Main Content */
+        .docs-content {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .docs-content h1 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #E0AAFF, #C77DFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .docs-content h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 32px 0 16px;
+            color: #E0AAFF;
+        }
+        
+        .docs-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 24px 0 12px;
+            color: white;
+        }
+        
+        .docs-content p,
+        .docs-content li {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 12px;
+        }
+        
+        .docs-content ul,
+        .docs-content ol {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+        
+        /* Command Cards */
+        .command-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        
+        .command-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .command-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(123, 44, 191, 0.3);
+        }
+        
+        .command-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #E0AAFF;
+            margin-bottom: 8px;
+        }
+        
+        .command-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .command-usage {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #C77DFF;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #C77DFF;
+            overflow-x: auto;
+        }
+        
+        /* Info Boxes */
+        .info-box {
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        
+        .info-box.warning {
+            background: rgba(255, 193, 7, 0.1);
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+        
+        .info-box.danger {
+            background: rgba(220, 53, 69, 0.1);
+            border-color: rgba(220, 53, 69, 0.3);
+        }
+        
+        .info-box h4 {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+        
+        .footer p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer a {
+            color: #E0AAFF;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .docs-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .nav-links {
+                gap: 16px;
+            }
+            
+            .docs-content {
+                padding: 24px;
+            }
+            
+            .command-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <img src="/images/lumi-avatar.png" alt="Lumi">
+                    <span>Lumi</span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="/">Início</a>
+                    <a href="/premium/plans">Premium</a>
+                    <a href="/demo">Demo</a>
+                    <a href="/support">Suporte</a>
+                    <a href="/docs" class="active">Docs</a>
+                    <a href="/dashboard">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="docs-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>Navegação</h3>
+                <ul>
+                    <li><a href="#introducao" class="active">Introdução</a></li>
+                    <li><a href="#comandos">Comandos</a></li>
+                    <li><a href="#moderacao">Moderação</a></li>
+                    <li><a href="#economia">Economia</a></li>
+                    <li><a href="#musica">Música</a></li>
+                    <li><a href="#ia">IA Conversacional</a></li>
+                    <li><a href="#analytics">Analytics</a></li>
+                    <li><a href="#personalizacao">Personalização</a></li>
+                    <li><a href="#configuracao">Configuração</a></li>
+                    <li><a href="#api">API</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Documentation -->
+            <main class="docs-content">
+                <h1 id="introducao">Documentação da Lumi</h1>
+                <p>Bem-vindo à documentação completa da Lumi! Aqui você encontrará tudo o que precisa para configurar e usar todos os recursos do bot Discord mais avançado do Brasil.</p>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Informações Gerais</h4>
+                    <p>A Lumi possui <strong>37 comandos únicos</strong> distribuídos em 13 categorias diferentes, oferecendo recursos que superam bots premium como MEE6, Dyno e Carl-bot.</p>
+                </div>
+
+                <h2 id="comandos">Comandos Principais</h2>
+                <p>A Lumi utiliza o prefixo <code>!</code> para todos os comandos. Use <code>!ajuda</code> para ver a lista completa.</p>
+
+                <div class="command-grid">
+                    <div class="command-card">
+                        <div class="command-name">!ajuda</div>
+                        <div class="command-description">Exibe todos os comandos disponíveis organizados por categoria</div>
+                        <div class="command-usage">!ajuda [categoria]</div>
+                    </div>
+
+                    <div class="command-card">
+                        <div class="command-name">!moderacao</div>
+                        <div class="command-description">Painel interativo de moderação com botões e configurações avançadas</div>
+                        <div class="command-usage">!moderacao</div>
+                    </div>
+
+                    <div class="command-card">
+                        <div class="command-name">!musica</div>
+                        <div class="command-description">Sistema de música com YouTube real e controles interativos</div>
+                        <div class="command-usage">!musica [search/play/pause/skip]</div>
+                    </div>
+
+                    <div class="command-card">
+                        <div class="command-name">!ia</div>
+                        <div class="command-description">IA conversacional avançada em português com análise de sentimentos</div>
+                        <div class="command-usage">!ia [sua mensagem]</div>
+                    </div>
+
+                    <div class="command-card">
+                        <div class="command-name">!economia</div>
+                        <div class="command-description">Sistema de economia virtual com LumiCoins, trabalho e banco</div>
+                        <div class="command-usage">!economia [trabalhar/saldo/banco]</div>
+                    </div>
+
+                    <div class="command-card">
+                        <div class="command-name">!analytics</div>
+                        <div class="command-description">Analytics em tempo real com dados autênticos do servidor</div>
+                        <div class="command-usage">!analytics</div>
+                    </div>
+                </div>
+
+                <h2 id="moderacao">Sistema de Moderação</h2>
+                <p>A Lumi oferece um sistema de moderação completo com interface moderna e recursos avançados:</p>
+
+                <h3>Recursos Disponíveis</h3>
+                <ul>
+                    <li><strong>Filtro de Palavras:</strong> Detecção automática de conteúdo inadequado</li>
+                    <li><strong>Sistema de Avisos:</strong> Avisos progressivos com punições automáticas</li>
+                    <li><strong>Anti-spam:</strong> Proteção contra spam e flood</li>
+                    <li><strong>Mute Temporário:</strong> Sistema de mute com duração personalizada</li>
+                    <li><strong>Logs Detalhados:</strong> Registro completo de todas as ações</li>
+                </ul>
+
+                <div class="code-block">
+!moderacao
+# Abre o painel interativo com botões para:
+# - Configurar filtro de palavras
+# - Definir punições automáticas
+# - Configurar anti-spam
+# - Ver logs de moderação
+                </div>
+
+                <h2 id="economia">Sistema de Economia</h2>
+                <p>Sistema completo de economia virtual integrado com XP e níveis:</p>
+
+                <h3>Comandos de Economia</h3>
+                <ul>
+                    <li><code>!economia trabalhar</code> - Ganhe LumiCoins trabalhando</li>
+                    <li><code>!economia saldo</code> - Veja seu saldo atual</li>
+                    <li><code>!economia banco</code> - Sistema bancário com juros</li>
+                    <li><code>!economia transferir</code> - Transfira moedas para outros usuários</li>
+                    <li><code>!ranking</code> - Ranking dos usuários mais ricos</li>
+                </ul>
+
+                <h2 id="musica">Sistema de Música</h2>
+                <p>A Lumi possui integração real com YouTube e controles modernos:</p>
+
+                <div class="info-box warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Importante</h4>
+                    <p>O bot precisa estar em um canal de voz para reproduzir música. Use os botões interativos para melhor experiência.</p>
+                </div>
+
+                <h3>Comandos de Música</h3>
+                <ul>
+                    <li><code>!musica play [música]</code> - Reproduzir música do YouTube</li>
+                    <li><code>!musica pause</code> - Pausar música atual</li>
+                    <li><code>!musica skip</code> - Pular para próxima música</li>
+                    <li><code>!musica queue</code> - Ver fila de reprodução</li>
+                    <li><code>!musica volume [0-100]</code> - Ajustar volume</li>
+                </ul>
+
+                <h2 id="ia">IA Conversacional</h2>
+                <p>Sistema de IA avançado especialmente treinado para português brasileiro:</p>
+
+                <h3>Recursos da IA</h3>
+                <ul>
+                    <li><strong>Conversação Natural:</strong> Resposta contextual em português</li>
+                    <li><strong>Análise de Sentimentos:</strong> Compreende emoções e contexto</li>
+                    <li><strong>Aprendizado:</strong> Melhora com as interações</li>
+                    <li><strong>Integração:</strong> Funciona com outros sistemas do bot</li>
+                </ul>
+
+                <div class="code-block">
+!ia Olá, como você está hoje?
+# A IA responderá de forma natural e contextual
+# Exemplo de resposta: "Olá! Estou ótima, obrigada por perguntar! 
+# Como posso ajudar você hoje no servidor?"
+                </div>
+
+                <h2 id="analytics">Sistema de Analytics</h2>
+                <p>Analytics em tempo real com dados autênticos do servidor:</p>
+
+                <h3>Métricas Disponíveis</h3>
+                <ul>
+                    <li><strong>Atividade de Mensagens:</strong> Contagem em tempo real</li>
+                    <li><strong>Comandos Executados:</strong> Estatísticas de uso</li>
+                    <li><strong>Usuários Ativos:</strong> Análise de engajamento</li>
+                    <li><strong>Canais Populares:</strong> Ranking por atividade</li>
+                    <li><strong>Horários de Pico:</strong> Análise temporal</li>
+                </ul>
+
+                <h2 id="personalizacao">Personalização</h2>
+                <p>Sistema avançado de personalização com temas e configurações visuais:</p>
+
+                <div class="code-block">
+!personalizacao
+# Abre painel com opções para:
+# - Escolher temas visuais (5 temas disponíveis)
+# - Personalizar cores
+# - Configurar prefixos
+# - Ajustar interface
+                </div>
+
+                <h2 id="configuracao">Configuração Inicial</h2>
+                <p>Para começar a usar a Lumi em seu servidor:</p>
+
+                <ol>
+                    <li><strong>Adicione o Bot:</strong> Use o link de convite oficial</li>
+                    <li><strong>Configure Permissões:</strong> Garanta que a Lumi tenha as permissões necessárias</li>
+                    <li><strong>Execute !autoconfig:</strong> Configuração automática inteligente</li>
+                    <li><strong>Personalize:</strong> Use !personalizacao para ajustar às suas preferências</li>
+                    <li><strong>Teste Recursos:</strong> Experimente !demo para ver funcionalidades</li>
+                </ol>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+                    <p>Use o comando <code>!diagnostico</code> para verificar se tudo está funcionando corretamente em seu servidor.</p>
+                </div>
+
+                <h2 id="api">API e Integração</h2>
+                <p>Para desenvolvedores e integrações avançadas:</p>
+
+                <h3>Endpoints Disponíveis</h3>
+                <ul>
+                    <li><code>/api/guilds</code> - Informações dos servidores</li>
+                    <li><code>/api/stats</code> - Estatísticas em tempo real</li>
+                    <li><code>/api/config</code> - Configurações do servidor</li>
+                </ul>
+
+                <div class="info-box danger">
+                    <h4><i class="fas fa-exclamation-circle"></i> Suporte Premium</h4>
+                    <p>Para suporte técnico avançado, integração personalizada e recursos exclusivos, considere nossos <a href="/premium/plans" style="color: #E0AAFF;">planos premium</a>.</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px;">
+                <img src="/images/lumi-avatar.png" alt="Lumi" style="width: 32px; height: 32px; border-radius: 50%;">
+                <span style="font-size: 20px; font-weight: 700;">Lumi</span>
+            </div>
+            <p>
+                © 2025 Lumi Bot. Desenvolvido por 
+                <a href="https://github.com/dyblack">Guilherme Almeida (Dy. Black)</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

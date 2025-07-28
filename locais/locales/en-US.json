@@ -1,0 +1,172 @@
+{
+  "navigation": {
+    "home": "Home",
+    "premium": "Premium",
+    "demo": "Demo",
+    "support": "Support",
+    "login": "Login with Discord",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "hero": {
+    "title": "The Most Advanced Discord Bot from Brazil",
+    "subtitle": "Conversational AI in Portuguese, real YouTube music, premium analytics, and revolutionary auto-repair system. Everything in one bot!",
+    "cta_add": "Add to Discord",
+    "cta_demo": "View Interactive Demo",
+    "cta_login": "Login to Manage"
+  },
+  "pricing": {
+    "title": "New Simplified Pricing System",
+    "subtitle": "90% features FREE forever + UNIQUE lifetime plan in Brazil",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "period": "forever",
+      "features": [
+        "🎵 YouTube Music FREE",
+        "🛡️ Complete visual moderation", 
+        "📊 Smart logs",
+        "⚙️ UNLIMITED reaction roles",
+        "💰 Complete economy system",
+        "🎮 Interactive mini-games",
+        "🔧 Auto-repair system"
+      ],
+      "cta": "Start Free"
+    },
+    "premium": {
+      "name": "Premium",
+      "price": "$1.99",
+      "period": "/month",
+      "popular": "Most Popular",
+      "features": [
+        "+ EVERYTHING from Free",
+        "🤖 Advanced conversational AI",
+        "📈 Detailed analytics", 
+        "🎨 Advanced customization",
+        "💬 Standard support (24h)",
+        "🌟 Premium Badge"
+      ],
+      "cta": "Choose Premium"
+    },
+    "vitalicio": {
+      "name": "Lifetime",
+      "price": "$15.99",
+      "period": "one-time payment",
+      "features": [
+        "+ EVERYTHING from Premium",
+        "🚀 Custom API",
+        "⭐ Exclusive features",
+        "👑 VIP support (2h)",
+        "💰 NO MONTHLY FEE",
+        "💎 = 8 months of Premium!"
+      ],
+      "cta": "Choose Lifetime"
+    }
+  },
+  "features": {
+    "title": "Unique Features",
+    "subtitle": "Features you won't find in any other Discord bot",
+    "ai": {
+      "title": "Conversational AI",
+      "description": "First truly conversational AI in Portuguese. Learns from your server and offers intelligent contextual responses."
+    },
+    "music": {
+      "title": "Real YouTube Music", 
+      "description": "Music system with real YouTube search, no limitations. Modern interface with button controls."
+    },
+    "analytics": {
+      "title": "Real Data Analytics",
+      "description": "Authentic server statistics, not simulated. PDF/Excel export and growth insights."
+    },
+    "interface": {
+      "title": "Superior Interface",
+      "description": "Modern web dashboard and functional Discord buttons. Intuitive interface and professional design."
+    },
+    "support": {
+      "title": "Brazilian Support",
+      "description": "Specialized support in Portuguese, made by Brazilians for Brazilians. We understand your community."
+    }
+  },
+  "why_lumi": {
+    "title": "Why Choose Lumi?",
+    "subtitle": "Unique features you won't find in any other Discord bot",
+    "brazilian": {
+      "title": "100% Brazilian",
+      "description": "Created and maintained by Brazilian developers, with complete understanding of our community's culture and needs."
+    },
+    "auto_repair": {
+      "title": "First with Auto-Repair",
+      "description": "Revolutionary system that automatically detects and fixes problems, keeping your server always running."
+    },
+    "passion": {
+      "title": "Made with Passion", 
+      "description": "Developed with total dedication by Guilherme Almeida (Dy. Black), every line of code designed for excellence."
+    }
+  },
+  "cta": {
+    "title": "Ready to Revolutionize Your Server?",
+    "subtitle": "Join thousands of users who have already discovered Lumi's power",
+    "add_discord": "Add to Discord Now",
+    "try_demo": "Try Premium Demo"
+  },
+  "footer": {
+    "description": "Brazil's most advanced Discord bot. Conversational AI, real music and much more!",
+    "resources": "Resources",
+    "demo": "Interactive Demo",
+    "plans": "Premium Plans",
+    "support": "Support",
+    "discord": "Discord",
+    "email": "Email",
+    "legal": "Legal",
+    "privacy": "Privacy",
+    "terms": "Terms of Use",
+    "developed_by": "Developed by"
+  },
+  "payment": {
+    "processing": "Processing Payment",
+    "redirecting": "Redirecting to secure checkout...",
+    "login_required": "You need to login first!",
+    "error": "Error processing payment. Please try again.",
+    "methods": {
+      "card": "Credit Card",
+      "pix": "PIX",
+      "boleto": "Bank Slip",
+      "debit": "Debit Card",
+      "apple_pay": "Apple Pay",
+      "google_pay": "Google Pay",
+      "paypal": "PayPal"
+    },
+    "gateways": {
+      "mercadopago": "Mercado Pago",
+      "stripe": "Stripe",
+      "paypal": "PayPal"
+    }
+  },
+  "vitalicio_page": {
+    "title": "Lifetime Plan",
+    "subtitle": "Pay once and have premium access FOREVER. The only lifetime plan for Discord bots in Brazil!",
+    "price_subtitle": "One-time payment - NO MONTHLY FEE",
+    "economy": "🔥 Save 89% vs MEE6 annual!",
+    "why_title": "Why choose Lifetime?",
+    "economy_title": "Smart Economy",
+    "economy_desc": "$15.99 once vs $1.99/month = Pays for itself in just 8 months. After that, it's pure savings forever!",
+    "exclusive_title": "Exclusive Features",
+    "exclusive_desc": "Custom API, unique features and functionalities that only lifetime users have access to.",
+    "vip_title": "VIP Status",
+    "vip_desc": "Priority support, exclusive badge and recognition as an official Lumi supporter."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "close": "Close"
+  }
+}

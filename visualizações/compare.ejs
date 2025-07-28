@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .compare-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .plan-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-card.recommended {
+            border: 2px solid #7c3aed;
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
+        }
+        
+        .plan-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        
+        .plan-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #7c3aed;
+            margin-bottom: 1rem;
+        }
+        
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+        
+        .plan-features li {
+            padding: 0.5rem 0;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        .plan-features li i {
+            color: #10b981;
+            margin-right: 0.5rem;
+            width: 16px;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <%- include('../layout') %>
+
+    <div class="compare-container">
+        <div class="text-center">
+            <h1>Comparação Detalhada de Planos</h1>
+            <p class="lead">Escolha o plano perfeito para o seu servidor Discord</p>
+        </div>
+
+        <div class="compare-grid">
+            <!-- Plano Gratuito -->
+            <div class="plan-card">
+                <div class="plan-title">Gratuito</div>
+                <div class="plan-price">R$ 0<span style="font-size: 1rem;">/mês</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> Comandos básicos de moderação</li>
+                    <li><i class="fas fa-check"></i> Sistema de XP e níveis</li>
+                    <li><i class="fas fa-check"></i> Economia básica</li>
+                    <li><i class="fas fa-check"></i> Música com limitações</li>
+                    <li><i class="fas fa-check"></i> Suporte por chat</li>
+                    <li><i class="fas fa-times" style="color: #ef4444;"></i> IA avançada</li>
+                    <li><i class="fas fa-times" style="color: #ef4444;"></i> Analytics detalhados</li>
+                    <li><i class="fas fa-times" style="color: #ef4444;"></i> Personalização completa</li>
+                </ul>
+                <a href="/premium/demo" class="cta-button">Testar Demo Grátis</a>
+            </div>
+
+            <!-- Plano Pro -->
+            <div class="plan-card recommended">
+                <div class="plan-title">Pro <span style="color: #10b981;">Recomendado</span></div>
+                <div class="plan-price">R$ 29<span style="font-size: 1rem;">/mês</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> Todos os recursos gratuitos</li>
+                    <li><i class="fas fa-check"></i> IA conversacional avançada</li>
+                    <li><i class="fas fa-check"></i> Analytics detalhados em tempo real</li>
+                    <li><i class="fas fa-check"></i> Música premium sem limites</li>
+                    <li><i class="fas fa-check"></i> Personalização completa</li>
+                    <li><i class="fas fa-check"></i> Suporte prioritário</li>
+                    <li><i class="fas fa-check"></i> Backup automático</li>
+                    <li><i class="fas fa-check"></i> Sistema anti-spam avançado</li>
+                </ul>
+                <a href="/premium/plans" class="cta-button">Assinar Pro</a>
+            </div>
+
+            <!-- Plano Enterprise -->
+            <div class="plan-card">
+                <div class="plan-title">Enterprise</div>
+                <div class="plan-price">R$ 99<span style="font-size: 1rem;">/mês</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> Todos os recursos Pro</li>
+                    <li><i class="fas fa-check"></i> Suporte dedicado 24/7</li>
+                    <li><i class="fas fa-check"></i> Múltiplos servidores</li>
+                    <li><i class="fas fa-check"></i> API personalizada</li>
+                    <li><i class="fas fa-check"></i> Dashboard empresarial</li>
+                    <li><i class="fas fa-check"></i> Relatórios avançados</li>
+                    <li><i class="fas fa-check"></i> Configuração personalizada</li>
+                    <li><i class="fas fa-check"></i> Treinamento da equipe</li>
+                </ul>
+                <a href="/premium/enterprise" class="cta-button">Falar com Vendas</a>
+            </div>
+        </div>
+
+        <div class="text-center" style="margin-top: 3rem;">
+            <p style="color: #9ca3af;">Dúvidas? <a href="/support" style="color: #7c3aed;">Entre em contato</a> com nossa equipe</p>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

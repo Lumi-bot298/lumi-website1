@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Lumi - O bot Discord mais avançado do Brasil. IA conversacional, música real do YouTube, analytics premium e muito mais!">
+    <meta name="keywords" content="Discord Bot, Bot Discord, Lumi, IA, Música, Analytics, Moderação, Premium">
+    <meta name="author" content="Guilherme Almeida - Dy. Black">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="<%= title %>">
+    <meta property="og:description" content="O bot Discord mais avançado do Brasil">
+    <meta property="og:image" content="/images/lumi-banner.png">
+    <meta property="og:url" content="https://lumibot.com.br">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/components.css" rel="stylesheet">
+    <link href="/css/animations.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/images/lumi-logo.svg">
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.js" defer></script>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-black/20 backdrop-blur-lg border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-3">
+                        <img src="/images/lumi-logo.svg" alt="Lumi" class="h-8 w-8 rounded-lg">
+                        <span class="text-white font-bold text-xl">Lumi</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-white/80 hover:text-white transition-colors">Início</a>
+                    <a href="/premium/plans" class="text-white/80 hover:text-white transition-colors">Premium</a>
+                    <a href="/premium/demo" class="text-white/80 hover:text-white transition-colors">Demo</a>
+                    <a href="https://discord.gg/lumi" class="text-white/80 hover:text-white transition-colors">Suporte</a>
+                    
+                    <% if (user) { %>
+                        <div class="flex items-center space-x-4">
+                            <a href="/dashboard" class="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-violet-600 transition-all">
+                                Dashboard
+                            </a>
+                            <div class="flex items-center space-x-2">
+                                <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" 
+                                     alt="Avatar" class="h-8 w-8 rounded-full">
+                                <span class="text-white text-sm"><%= user.username %></span>
+                                <a href="/auth/logout" class="text-white/60 hover:text-white/80 text-sm">Sair</a>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <a href="/auth/discord" class="bg-[#5865F2] text-white px-6 py-2 rounded-lg hover:bg-[#4752C4] transition-colors flex items-center space-x-2">
+                            <i class="fab fa-discord"></i>
+                            <span>Login com Discord</span>
+                        </a>
+                    <% } %>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-white p-2">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Content will be inserted here by individual pages -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black/30 backdrop-blur-lg border-t border-white/10 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="/images/lumi-logo.svg" alt="Lumi" class="h-8 w-8 rounded-lg">
+                        <span class="text-white font-bold text-xl">Lumi</span>
+                    </div>
+                    <p class="text-white/60 text-sm">
+                        O bot Discord mais avançado do Brasil. IA conversacional, música real e muito mais!
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Recursos</h3>
+                    <ul class="space-y-2 text-white/60 text-sm">
+                        <li><a href="/premium/demo" class="hover:text-white transition-colors">Demo Interativa</a></li>
+                        <li><a href="/premium/plans" class="hover:text-white transition-colors">Planos Premium</a></li>
+                        <li><a href="/premium/compare" class="hover:text-white transition-colors">Comparação</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Suporte</h3>
+                    <ul class="space-y-2 text-white/60 text-sm">
+                        <li><a href="https://discord.gg/lumi" class="hover:text-white transition-colors">Discord</a></li>
+                        <li><a href="mailto:suporte@lumibot.com.br" class="hover:text-white transition-colors">Email</a></li>
+                        <li><a href="/docs" class="hover:text-white transition-colors">Documentação</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2 text-white/60 text-sm">
+                        <li><a href="/privacy" class="hover:text-white transition-colors">Privacidade</a></li>
+                        <li><a href="/terms" class="hover:text-white transition-colors">Termos de Uso</a></li>
+                        <li><a href="/refund" class="hover:text-white transition-colors">Reembolso</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 mt-8 pt-8 text-center">
+                <p class="text-white/60 text-sm">
+                    © 2025 Lumi Bot. Desenvolvido por 
+                    <a href="https://github.com/dyblack" class="text-purple-400 hover:text-purple-300 transition-colors">
+                        Guilherme Almeida (Dy. Black)
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

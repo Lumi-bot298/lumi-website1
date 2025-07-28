@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .payment-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        
+        .payment-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .payment-method {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: #7c3aed;
+            background: rgba(124, 58, 237, 0.1);
+        }
+        
+        .payment-method.selected {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .price-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #10b981;
+            margin: 1rem 0;
+        }
+        
+        .demo-notice {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #fbbf24;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../layout') %>
+
+    <div class="payment-container">
+        <div class="payment-card">
+            <h1><%= planConfig.title %></h1>
+            <p class="text-white/80"><%= planConfig.description %></p>
+            
+            <div class="price-display">
+                R$ <%= planConfig.price.toFixed(2).replace('.', ',') %> / mês
+            </div>
+
+            <div class="demo-notice">
+                <i class="fas fa-info-circle mr-2"></i>
+                <strong>Sistema Demo:</strong> Esta é uma simulação. Em produção, você poderá pagar com PIX, boleto, cartão ou PicPay.
+            </div>
+
+            <h3>Escolha a forma de pagamento:</h3>
+            
+            <div class="payment-methods">
+                <div class="payment-method" onclick="selectPayment('pix')">
+                    <i class="fas fa-qrcode text-3xl text-green-400 mb-2"></i>
+                    <div class="font-bold">PIX</div>
+                    <div class="text-sm text-white/60">Aprovação instantânea</div>
+                </div>
+                
+                <div class="payment-method" onclick="selectPayment('card')">
+                    <i class="fas fa-credit-card text-3xl text-blue-400 mb-2"></i>
+                    <div class="font-bold">Cartão</div>
+                    <div class="text-sm text-white/60">Débito ou crédito</div>
+                </div>
+                
+                <div class="payment-method" onclick="selectPayment('boleto')">
+                    <i class="fas fa-barcode text-3xl text-orange-400 mb-2"></i>
+                    <div class="font-bold">Boleto</div>
+                    <div class="text-sm text-white/60">Prazo 3 dias úteis</div>
+                </div>
+                
+                <div class="payment-method" onclick="selectPayment('picpay')">
+                    <i class="fas fa-mobile-alt text-3xl text-purple-400 mb-2"></i>
+                    <div class="font-bold">PicPay</div>
+                    <div class="text-sm text-white/60">Rápido e fácil</div>
+                </div>
+            </div>
+
+            <div id="payment-details" style="display: none;" class="mt-4 p-4 bg-white/5 rounded-lg">
+                <div id="payment-content"></div>
+            </div>
+
+            <div class="flex gap-4 justify-center mt-6">
+                <button onclick="processPayment()" class="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-3 rounded-xl hover:from-green-600 hover:to-green-700 transition-all font-semibold" disabled id="pay-btn">
+                    <i class="fas fa-lock mr-2"></i>
+                    Pagar com Segurança
+                </button>
+                <a href="/premium/plans" class="bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-xl backdrop-blur-lg border border-white/20 transition-all font-semibold">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedMethod = null;
+
+        function selectPayment(method) {
+            // Remove seleção anterior
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Adiciona seleção atual
+            event.target.closest('.payment-method').classList.add('selected');
+            selectedMethod = method;
+            
+            // Mostra detalhes do pagamento
+            showPaymentDetails(method);
+            
+            // Habilita botão
+            document.getElementById('pay-btn').disabled = false;
+        }
+
+        function showPaymentDetails(method) {
+            const details = document.getElementById('payment-details');
+            const content = document.getElementById('payment-content');
+            
+            const methodInfo = {
+                pix: {
+                    title: 'PIX - Pagamento Instantâneo',
+                    desc: 'Você receberá um QR Code para pagamento via PIX. Aprovação em até 5 minutos.',
+                    icon: 'fas fa-qrcode text-green-400'
+                },
+                card: {
+                    title: 'Cartão de Crédito/Débito',
+                    desc: 'Aceitamos Visa, Mastercard, Elo e Hipercard. Parcelamento disponível.',
+                    icon: 'fas fa-credit-card text-blue-400'
+                },
+                boleto: {
+                    title: 'Boleto Bancário',
+                    desc: 'Pagamento em qualquer banco, lotérica ou internet banking. Vencimento em 3 dias.',
+                    icon: 'fas fa-barcode text-orange-400'
+                },
+                picpay: {
+                    title: 'PicPay',
+                    desc: 'Pagamento direto pelo app PicPay. Rápido, seguro e sem taxas.',
+                    icon: 'fas fa-mobile-alt text-purple-400'
+                }
+            };
+            
+            const info = methodInfo[method];
+            content.innerHTML = `
+                <div class="text-center">
+                    <i class="${info.icon} text-2xl mb-2"></i>
+                    <h4 class="font-bold text-white">${info.title}</h4>
+                    <p class="text-white/70 text-sm mt-1">${info.desc}</p>
+                </div>
+            `;
+            
+            details.style.display = 'block';
+        }
+
+        function processPayment() {
+            if (!selectedMethod) {
+                alert('Selecione uma forma de pagamento');
+                return;
+            }
+            
+            // Simular processamento
+            const btn = document.getElementById('pay-btn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                alert(`Demo: Pagamento via ${selectedMethod.toUpperCase()} simulado com sucesso!\\n\\nEm produção, você seria redirecionado para completar o pagamento.`);
+                window.location.href = '/premium/success?demo=1&method=' + selectedMethod;
+            }, 2000);
+        }
+    </script>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<%- include('../layout') -%>
+
+<!-- Dashboard Container -->
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 min-h-screen bg-black/20 backdrop-blur-lg border-r border-white/10">
+            <div class="p-6">
+                <div class="flex items-center space-x-3 mb-8">
+                    <img src="/images/lumi-avatar.png" alt="Lumi" class="h-10 w-10 rounded-lg">
+                    <div>
+                        <h2 class="text-white font-bold text-lg">Dashboard</h2>
+                        <p class="text-white/60 text-sm">Configurações</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <nav class="space-y-2">
+                    <a href="/dashboard" class="sidebar-link flex items-center space-x-3">
+                        <i class="fas fa-home"></i>
+                        <span>Visão Geral</span>
+                    </a>
+                    <a href="/dashboard/servers" class="sidebar-link flex items-center space-x-3">
+                        <i class="fas fa-server"></i>
+                        <span>Meus Servidores</span>
+                    </a>
+                    <a href="#" class="sidebar-link active flex items-center space-x-3">
+                        <i class="fas fa-cogs"></i>
+                        <span>Configurações</span>
+                    </a>
+                </nav>
+
+                <!-- Server Modules -->
+                <div class="mt-8">
+                    <h3 class="text-white/60 text-sm font-semibold mb-4">MÓDULOS</h3>
+                    <nav class="space-y-2">
+                        <a href="#general" onclick="showModule('general')" class="module-link active flex items-center space-x-3">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Geral</span>
+                        </a>
+                        <a href="#moderation" onclick="showModule('moderation')" class="module-link flex items-center space-x-3">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Moderação</span>
+                        </a>
+                        <a href="#music" onclick="showModule('music')" class="module-link flex items-center space-x-3">
+                            <i class="fas fa-music"></i>
+                            <span>Música</span>
+                        </a>
+                        <a href="#ai" onclick="showModule('ai')" class="module-link flex items-center space-x-3">
+                            <i class="fas fa-brain"></i>
+                            <span>IA Conversacional</span>
+                        </a>
+                        <a href="#analytics" onclick="showModule('analytics')" class="module-link flex items-center space-x-3">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Analytics</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1">
+            <!-- Header -->
+            <header class="bg-white/5 backdrop-blur-lg border-b border-white/10 px-8 py-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold text-white" id="module-title">Configurações Gerais</h1>
+                        <p class="text-white/70">Configure os módulos da Lumi para seu servidor</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="saveSettings()" class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all">
+                            <i class="fas fa-save mr-2"></i>
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Module Content -->
+            <main class="p-8">
+                <!-- General Module -->
+                <div id="general-module" class="module-content">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Basic Settings -->
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h3 class="text-xl font-bold text-white mb-6">
+                                <i class="fas fa-cog mr-2 text-purple-400"></i>
+                                Configurações Básicas
+                            </h3>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-white font-medium mb-2">Prefixo dos Comandos</label>
+                                    <input type="text" id="prefix" value="!" 
+                                           class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-purple-500">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-white font-medium mb-2">Idioma</label>
+                                    <select id="language" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-purple-500">
+                                        <option value="pt-BR">Português (Brasil)</option>
+                                        <option value="en-US">English (US)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module Status -->
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h3 class="text-xl font-bold text-white mb-6">
+                                <i class="fas fa-toggle-on mr-2 text-purple-400"></i>
+                                Status dos Módulos
+                            </h3>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-white">Moderação</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="moderation-enabled" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-500"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <span class="text-white">Sistema de Música</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="music-enabled" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-500"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <span class="text-white">IA Conversacional</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="ai-enabled" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-500"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <span class="text-white">Analytics Avançados</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="analytics-enabled" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-500"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other modules would go here -->
+                <div id="moderation-module" class="module-content hidden">
+                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-6">
+                            <i class="fas fa-shield-alt mr-2 text-purple-400"></i>
+                            Configurações de Moderação
+                        </h3>
+                        <p class="text-white/60">Módulo de moderação em desenvolvimento...</p>
+                    </div>
+                </div>
+
+                <div id="music-module" class="module-content hidden">
+                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-6">
+                            <i class="fas fa-music mr-2 text-purple-400"></i>
+                            Configurações de Música
+                        </h3>
+                        <p class="text-white/60">Módulo de música em desenvolvimento...</p>
+                    </div>
+                </div>
+
+                <div id="ai-module" class="module-content hidden">
+                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-6">
+                            <i class="fas fa-brain mr-2 text-purple-400"></i>
+                            IA Conversacional
+                        </h3>
+                        <p class="text-white/60">Módulo de IA em desenvolvimento...</p>
+                    </div>
+                </div>
+
+                <div id="analytics-module" class="module-content hidden">
+                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-6">
+                            <i class="fas fa-chart-bar mr-2 text-purple-400"></i>
+                            Analytics do Servidor
+                        </h3>
+                        <p class="text-white/60">Módulo de analytics em desenvolvimento...</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script>
+const serverId = '<%= serverId %>';
+let currentSettings = {};
+
+function showModule(moduleName) {
+    // Hide all modules
+    document.querySelectorAll('.module-content').forEach(module => {
+        module.classList.add('hidden');
+    });
+    
+    // Remove active class from all links
+    document.querySelectorAll('.module-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Show selected module
+    document.getElementById(moduleName + '-module').classList.remove('hidden');
+    
+    // Add active class to selected link
+    event.target.closest('.module-link').classList.add('active');
+    
+    // Update title
+    const titles = {
+        general: 'Configurações Gerais',
+        moderation: 'Moderação',
+        music: 'Sistema de Música',
+        ai: 'IA Conversacional',
+        analytics: 'Analytics'
+    };
+    
+    document.getElementById('module-title').textContent = titles[moduleName];
+}
+
+async function loadSettings() {
+    try {
+        const response = await fetch(`/api/guild/${serverId}`);
+        const data = await response.json();
+        
+        if (data.success) {
+            currentSettings = data.guild.settings;
+            
+            // Update UI with current settings
+            document.getElementById('prefix').value = currentSettings.prefix || '!';
+            document.getElementById('moderation-enabled').checked = currentSettings.moderationEnabled;
+            document.getElementById('music-enabled').checked = currentSettings.musicEnabled;
+            document.getElementById('ai-enabled').checked = currentSettings.aiEnabled;
+            document.getElementById('analytics-enabled').checked = currentSettings.analyticsEnabled;
+        }
+    } catch (error) {
+        console.error('Erro ao carregar configurações:', error);
+    }
+}
+
+async function saveSettings() {
+    const settings = {
+        prefix: document.getElementById('prefix').value,
+        moderationEnabled: document.getElementById('moderation-enabled').checked,
+        musicEnabled: document.getElementById('music-enabled').checked,
+        aiEnabled: document.getElementById('ai-enabled').checked,
+        analyticsEnabled: document.getElementById('analytics-enabled').checked
+    };
+    
+    try {
+        const response = await fetch(`/api/guild/${serverId}/settings`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(settings)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Show success message
+            showNotification('Configurações salvas com sucesso!', 'success');
+        } else {
+            showNotification('Erro ao salvar configurações', 'error');
+        }
+    } catch (error) {
+        console.error('Erro ao salvar configurações:', error);
+        showNotification('Erro de conexão', 'error');
+    }
+}
+
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg text-white z-50 ${
+        type === 'success' ? 'bg-green-500' : 'bg-red-500'
+    }`;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+// Load settings on page load
+document.addEventListener('DOMContentLoaded', loadSettings);
+</script>
