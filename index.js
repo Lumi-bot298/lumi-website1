@@ -71,7 +71,17 @@ app.get('/auth/discord', passport.authenticate('discord'));
 
 app.get('/auth/discord/callback', 
   passport.authenticate('discord', { failureRedirect: '/oauth-error' }),
-  (req, res) => res.redirect('/dashboard')
+  (req, res) => {
+    // Debug para verificar se callback está funcionando
+    console.log('✅ Discord OAuth callback executado com sucesso');
+    console.log('Usuário autenticado:', req.user?.username || 'Sem usuário');
+    
+    // Redirecionamento seguro para evitar loops
+    const redirectTo = req.session.returnTo || '/dashboard';
+    delete req.session.returnTo;
+    
+    res.redirect(redirectTo);
+  }
 );
 
 app.get('/logout', (req, res) => {
@@ -88,8 +98,13 @@ app.get('/', (req, res) => {
 
 app.get('/dashboard', (req, res) => {
   if (!req.isAuthenticated()) {
+    // Salvar URL de destino para redirecionamento após login
+    req.session.returnTo = '/dashboard';
     return res.redirect('/auth/discord');
   }
+  
+  console.log('✅ Dashboard acessado por:', req.user?.username || 'Usuário desconhecido');
+  
   res.render('dashboard', {
     title: 'Dashboard - Lumi',
     user: req.user
@@ -100,6 +115,52 @@ app.get('/premium/plans', (req, res) => {
   res.render('premium/plans', {
     title: 'Planos Premium - Lumi',
     user: req.user || null
+  });
+});
+
+// Rota de login simples
+app.get('/login', (req, res) => {
+  res.redirect('/auth/discord');
+});
+
+// Rotas de pagamento 
+app.post('/payments/create-payment', (req, res) => {
+  const { plan } = req.body;
+  
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({ 
+      success: false, 
+      error: 'Login necessário',
+      redirect: '/login'
+    });
+  }
+  
+  // Simular checkout para demo
+  const checkoutUrls = {
+    premium: '/premium/checkout?plan=premium',
+    vitalicio: '/premium/checkout?plan=vitalicio'
+  };
+  
+  res.json({
+    success: true,
+    demo: true,
+    checkout_url: checkoutUrls[plan] || '/premium/plans',
+    message: 'Redirecionando para checkout...'
+  });
+});
+
+// Página de checkout
+app.get('/premium/checkout', (req, res) => {
+  const { plan } = req.query;
+  
+  if (!req.isAuthenticated()) {
+    return res.redirect('/auth/discord');
+  }
+  
+  res.render('premium/checkout', {
+    title: 'Checkout - Lumi',
+    user: req.user,
+    plan: plan
   });
 });
 

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - <%= plan %> - Lumi</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/lumi-avatar.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0F0B19 0%, #2D1B69 50%, #7B2CBF 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: white;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .checkout-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .plan-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #7B2CBF, #9D4EDD);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #7B2CBF;
+            margin-bottom: 20px;
+        }
+        
+        .demo-notice {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid #FFC107;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .demo-notice h3 {
+            color: #FFC107;
+            margin-bottom: 10px;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .payment-method {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .payment-method i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #7B2CBF;
+        }
+        
+        .btn-back {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-demo {
+            background: linear-gradient(135deg, #7B2CBF, #9D4EDD);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-demo:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="checkout-card">
+            <div class="plan-badge">Plano <%= plan.charAt(0).toUpperCase() + plan.slice(1) %></div>
+            
+            <h1>Checkout Demo</h1>
+            
+            <% if (plan === 'premium') { %>
+                <div class="price">R$ 9,90/mês</div>
+            <% } else if (plan === 'vitalicio') { %>
+                <div class="price">R$ 79,90</div>
+                <p style="margin-bottom: 20px;">Pagamento único - sem mensalidade!</p>
+            <% } %>
+            
+            <div class="demo-notice">
+                <h3><i class="fas fa-info-circle"></i> Sistema em Demonstração</h3>
+                <p>Este é um ambiente de demonstração. Em produção, você terá acesso completo ao sistema de pagamentos do Mercado Pago com:</p>
+            </div>
+            
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <i class="fas fa-qrcode"></i>
+                    <h4>PIX</h4>
+                    <p>Pagamento instantâneo</p>
+                </div>
+                
+                <div class="payment-method">
+                    <i class="fas fa-credit-card"></i>
+                    <h4>Cartão</h4>
+                    <p>Crédito e débito</p>
+                </div>
+                
+                <div class="payment-method">
+                    <i class="fas fa-file-invoice"></i>
+                    <h4>Boleto</h4>
+                    <p>Vencimento em 3 dias</p>
+                </div>
+                
+                <div class="payment-method">
+                    <i class="fab fa-paypal"></i>
+                    <h4>PicPay</h4>
+                    <p>Carteira digital</p>
+                </div>
+            </div>
+            
+            <p style="margin-bottom: 30px; color: rgba(255, 255, 255, 0.7);">
+                Olá <strong><%= user.username %></strong>! Em produção, você seria redirecionado para o checkout seguro do Mercado Pago.
+            </p>
+            
+            <button class="btn-demo" onclick="simulatePayment()">
+                <i class="fas fa-shopping-cart"></i> Simular Pagamento
+            </button>
+            
+            <a href="/premium/plans" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Voltar aos Planos
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function simulatePayment() {
+            alert('✅ Pagamento simulado com sucesso!\n\nEm produção:\n• Você seria redirecionado para o Mercado Pago\n• Poderia pagar com PIX, cartão, boleto ou PicPay\n• Receberia confirmação por email\n• Teria acesso imediato aos recursos premium');
+            
+            // Simular redirecionamento para dashboard
+            setTimeout(() => {
+                window.location.href = '/dashboard';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
