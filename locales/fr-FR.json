@@ -1,0 +1,172 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "premium": "Premium",
+    "demo": "Démo",
+    "support": "Support",
+    "login": "Connexion avec Discord",
+    "dashboard": "Tableau de bord",
+    "logout": "Déconnexion"
+  },
+  "hero": {
+    "title": "Le Bot Discord le Plus Avancé du Brésil",
+    "subtitle": "IA conversationnelle en portugais, musique YouTube réelle, analytics premium et système révolutionnaire d'auto-réparation. Tout en un seul bot!",
+    "cta_add": "Ajouter à Discord",
+    "cta_demo": "Voir la Démo Interactive",
+    "cta_login": "Se Connecter pour Gérer"
+  },
+  "pricing": {
+    "title": "Nouveau Système de Prix Simplifié",
+    "subtitle": "90% des fonctionnalités GRATUITES pour toujours + plan à vie UNIQUE au Brésil",
+    "free": {
+      "name": "Gratuit",
+      "price": "0€",
+      "period": "pour toujours",
+      "features": [
+        "🎵 Musique YouTube GRATUITE",
+        "🛡️ Modération visuelle complète", 
+        "📊 Logs intelligents",
+        "⚙️ Reaction roles ILLIMITÉS",
+        "💰 Système économique complet",
+        "🎮 Mini-jeux interactifs",
+        "🔧 Système d'auto-réparation"
+      ],
+      "cta": "Commencer Gratuitement"
+    },
+    "premium": {
+      "name": "Premium",
+      "price": "1,79€",
+      "period": "/mois",
+      "popular": "Le Plus Populaire",
+      "features": [
+        "+ TOUT du Gratuit",
+        "🤖 IA conversationnelle avancée",
+        "📈 Analytics détaillés", 
+        "🎨 Personnalisation avancée",
+        "💬 Support standard (24h)",
+        "🌟 Badge Premium"
+      ],
+      "cta": "Choisir Premium"
+    },
+    "vitalicio": {
+      "name": "À Vie",
+      "price": "14,99€",
+      "period": "paiement unique",
+      "features": [
+        "+ TOUT du Premium",
+        "🚀 API personnalisée",
+        "⭐ Fonctionnalités exclusives",
+        "👑 Support VIP (2h)",
+        "💰 AUCUN FRAIS MENSUEL",
+        "💎 = 8 mois de Premium!"
+      ],
+      "cta": "Choisir À Vie"
+    }
+  },
+  "features": {
+    "title": "Fonctionnalités Uniques",
+    "subtitle": "Des fonctionnalités que vous ne trouverez dans aucun autre bot Discord",
+    "ai": {
+      "title": "IA Conversationnelle",
+      "description": "Première IA vraiment conversationnelle en portugais. Apprend de votre serveur et offre des réponses contextuelles intelligentes."
+    },
+    "music": {
+      "title": "Musique YouTube Réelle", 
+      "description": "Système musical avec recherche YouTube réelle, sans limitations. Interface moderne avec contrôles par boutons."
+    },
+    "analytics": {
+      "title": "Analytics avec Données Réelles",
+      "description": "Statistiques authentiques de votre serveur, non simulées. Export PDF/Excel et insights de croissance."
+    },
+    "interface": {
+      "title": "Interface Supérieure",
+      "description": "Tableau de bord web moderne et boutons Discord fonctionnels. Interface intuitive et design professionnel."
+    },
+    "support": {
+      "title": "Support Brésilien",
+      "description": "Support spécialisé en portugais, fait par des Brésiliens pour des Brésiliens. Nous comprenons votre communauté."
+    }
+  },
+  "why_lumi": {
+    "title": "Pourquoi Choisir Lumi?",
+    "subtitle": "Des fonctionnalités uniques que vous ne trouverez dans aucun autre bot Discord",
+    "brazilian": {
+      "title": "100% Brésilien",
+      "description": "Créé et maintenu par des développeurs brésiliens, avec une compréhension totale de la culture et des besoins de notre communauté."
+    },
+    "auto_repair": {
+      "title": "Premier avec Auto-Réparation",
+      "description": "Système révolutionnaire qui détecte et corrige automatiquement les problèmes, gardant votre serveur toujours fonctionnel."
+    },
+    "passion": {
+      "title": "Fait avec Passion", 
+      "description": "Développé avec dévouement total par Guilherme Almeida (Dy. Black), chaque ligne de code pensée pour l'excellence."
+    }
+  },
+  "cta": {
+    "title": "Prêt à Révolutionner Votre Serveur?",
+    "subtitle": "Rejoignez des milliers d'utilisateurs qui ont déjà découvert le pouvoir de Lumi",
+    "add_discord": "Ajouter à Discord Maintenant",
+    "try_demo": "Essayer la Démo Premium"
+  },
+  "footer": {
+    "description": "Le bot Discord le plus avancé du Brésil. IA conversationnelle, musique réelle et bien plus!",
+    "resources": "Ressources",
+    "demo": "Démo Interactive",
+    "plans": "Plans Premium",
+    "support": "Support",
+    "discord": "Discord",
+    "email": "Email",
+    "legal": "Légal",
+    "privacy": "Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "developed_by": "Développé par"
+  },
+  "payment": {
+    "processing": "Traitement du Paiement",
+    "redirecting": "Redirection vers le checkout sécurisé...",
+    "login_required": "Vous devez vous connecter d'abord!",
+    "error": "Erreur lors du traitement du paiement. Veuillez réessayer.",
+    "methods": {
+      "card": "Carte de Crédit",
+      "pix": "PIX",
+      "boleto": "Billet Bancaire",
+      "debit": "Carte de Débit",
+      "apple_pay": "Apple Pay",
+      "google_pay": "Google Pay",
+      "paypal": "PayPal"
+    },
+    "gateways": {
+      "mercadopago": "Mercado Pago",
+      "stripe": "Stripe",
+      "paypal": "PayPal"
+    }
+  },
+  "vitalicio_page": {
+    "title": "Plan À Vie",
+    "subtitle": "Payez une fois et ayez un accès premium POUR TOUJOURS. Le seul plan à vie pour bots Discord au Brésil!",
+    "price_subtitle": "Paiement unique - AUCUN FRAIS MENSUEL",
+    "economy": "🔥 Économisez 89% vs MEE6 annuel!",
+    "why_title": "Pourquoi choisir À Vie?",
+    "economy_title": "Économie Intelligente",
+    "economy_desc": "14,99€ une fois vs 1,79€/mois = Rentabilisé en seulement 8 mois. Après cela, c'est de l'économie pure pour toujours!",
+    "exclusive_title": "Fonctionnalités Exclusives",
+    "exclusive_desc": "API personnalisée, fonctionnalités uniques et fonctionnalités auxquelles seuls les utilisateurs à vie ont accès.",
+    "vip_title": "Statut VIP",
+    "vip_desc": "Support prioritaire, badge exclusif et reconnaissance en tant que supporter officiel de Lumi."
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "continue": "Continuer",
+    "back": "Retour",
+    "next": "Suivant",
+    "save": "Sauvegarder",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "close": "Fermer"
+  }
+}

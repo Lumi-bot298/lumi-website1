@@ -1,0 +1,172 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "premium": "Premium",
+    "demo": "Demo",
+    "support": "Soporte",
+    "login": "Iniciar sesión con Discord",
+    "dashboard": "Panel",
+    "logout": "Cerrar sesión"
+  },
+  "hero": {
+    "title": "El Bot de Discord Más Avanzado de Brasil",
+    "subtitle": "IA conversacional en portugués, música real de YouTube, analytics premium y el revolucionario sistema de auto-reparación. ¡Todo en un solo bot!",
+    "cta_add": "Agregar a Discord",
+    "cta_demo": "Ver Demo Interactiva",
+    "cta_login": "Iniciar Sesión para Gestionar"
+  },
+  "pricing": {
+    "title": "Nuevo Sistema de Precios Simplificado",
+    "subtitle": "90% de funciones GRATIS para siempre + plan vitalicio ÚNICO en Brasil",
+    "free": {
+      "name": "Gratuito",
+      "price": "$0",
+      "period": "para siempre",
+      "features": [
+        "🎵 Música YouTube GRATIS",
+        "🛡️ Moderación visual completa", 
+        "📊 Logs inteligentes",
+        "⚙️ Reaction roles ILIMITADOS",
+        "💰 Sistema económico completo",
+        "🎮 Mini-juegos interactivos",
+        "🔧 Sistema de auto-reparación"
+      ],
+      "cta": "Empezar Gratis"
+    },
+    "premium": {
+      "name": "Premium",
+      "price": "$1.99",
+      "period": "/mes",
+      "popular": "Más Popular",
+      "features": [
+        "+ TODO lo Gratuito",
+        "🤖 IA conversacional avanzada",
+        "📈 Analytics detallados", 
+        "🎨 Personalización avanzada",
+        "💬 Soporte estándar (24h)",
+        "🌟 Insignia Premium"
+      ],
+      "cta": "Elegir Premium"
+    },
+    "vitalicio": {
+      "name": "Vitalicio",
+      "price": "$15.99",
+      "period": "pago único",
+      "features": [
+        "+ TODO del Premium",
+        "🚀 API personalizada",
+        "⭐ Funciones exclusivas",
+        "👑 Soporte VIP (2h)",
+        "💰 SIN CUOTA MENSUAL",
+        "💎 = ¡8 meses de Premium!"
+      ],
+      "cta": "Elegir Vitalicio"
+    }
+  },
+  "features": {
+    "title": "Características Únicas",
+    "subtitle": "Funciones que no encontrarás en ningún otro bot de Discord",
+    "ai": {
+      "title": "IA Conversacional",
+      "description": "Primera IA verdaderamente conversacional en portugués. Aprende de tu servidor y ofrece respuestas contextuales inteligentes."
+    },
+    "music": {
+      "title": "Música Real de YouTube", 
+      "description": "Sistema de música con búsqueda real en YouTube, sin limitaciones. Interfaz moderna con controles de botones."
+    },
+    "analytics": {
+      "title": "Analytics con Datos Reales",
+      "description": "Estadísticas auténticas de tu servidor, no simuladas. Exportación PDF/Excel e insights de crecimiento."
+    },
+    "interface": {
+      "title": "Interfaz Superior",
+      "description": "Panel web moderno y botones funcionales en Discord. Interfaz intuitiva y diseño profesional."
+    },
+    "support": {
+      "title": "Soporte Brasileño",
+      "description": "Soporte especializado en portugués, hecho por brasileños para brasileños. Entendemos tu comunidad."
+    }
+  },
+  "why_lumi": {
+    "title": "¿Por qué Elegir Lumi?",
+    "subtitle": "Características únicas que no encontrarás en ningún otro bot de Discord",
+    "brazilian": {
+      "title": "100% Brasileño",
+      "description": "Creado y mantenido por desarrolladores brasileños, con comprensión total de la cultura y necesidades de nuestra comunidad."
+    },
+    "auto_repair": {
+      "title": "Primero con Auto-Reparación",
+      "description": "Sistema revolucionario que detecta y corrige problemas automáticamente, manteniendo tu servidor siempre funcionando."
+    },
+    "passion": {
+      "title": "Hecho con Pasión", 
+      "description": "Desarrollado con dedicación total por Guilherme Almeida (Dy. Black), cada línea de código pensada para la excelencia."
+    }
+  },
+  "cta": {
+    "title": "¿Listo para Revolucionar tu Servidor?",
+    "subtitle": "Únete a miles de usuarios que ya han descubierto el poder de Lumi",
+    "add_discord": "Agregar a Discord Ahora",
+    "try_demo": "Probar Demo Premium"
+  },
+  "footer": {
+    "description": "El bot de Discord más avanzado de Brasil. IA conversacional, música real y mucho más!",
+    "resources": "Recursos",
+    "demo": "Demo Interactiva",
+    "plans": "Planes Premium",
+    "support": "Soporte",
+    "discord": "Discord",
+    "email": "Email",
+    "legal": "Legal",
+    "privacy": "Privacidad",
+    "terms": "Términos de Uso",
+    "developed_by": "Desarrollado por"
+  },
+  "payment": {
+    "processing": "Procesando Pago",
+    "redirecting": "Redirigiendo al checkout seguro...",
+    "login_required": "¡Necesitas iniciar sesión primero!",
+    "error": "Error al procesar el pago. Por favor intenta de nuevo.",
+    "methods": {
+      "card": "Tarjeta de Crédito",
+      "pix": "PIX",
+      "boleto": "Boleta Bancaria",
+      "debit": "Tarjeta de Débito",
+      "apple_pay": "Apple Pay",
+      "google_pay": "Google Pay",
+      "paypal": "PayPal"
+    },
+    "gateways": {
+      "mercadopago": "Mercado Pago",
+      "stripe": "Stripe",
+      "paypal": "PayPal"
+    }
+  },
+  "vitalicio_page": {
+    "title": "Plan Vitalicio",
+    "subtitle": "¡Paga una vez y ten acceso premium PARA SIEMPRE. El único plan vitalicio para bots de Discord en Brasil!",
+    "price_subtitle": "Pago único - SIN CUOTA MENSUAL",
+    "economy": "🔥 ¡Ahorra 89% vs MEE6 anual!",
+    "why_title": "¿Por qué elegir Vitalicio?",
+    "economy_title": "Economía Inteligente",
+    "economy_desc": "$15.99 una vez vs $1.99/mes = Se paga en solo 8 meses. ¡Después de eso, es ahorro puro para siempre!",
+    "exclusive_title": "Funciones Exclusivas",
+    "exclusive_desc": "API personalizada, características únicas y funcionalidades a las que solo los usuarios vitalicios tienen acceso.",
+    "vip_title": "Estado VIP",
+    "vip_desc": "Soporte prioritario, insignia exclusiva y reconocimiento como partidario oficial de Lumi."
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "view": "Ver",
+    "close": "Cerrar"
+  }
+}

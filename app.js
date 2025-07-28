@@ -8,6 +8,8 @@ const rateLimit = require('express-rate-limit');
 const compression = require('compression');
 const morgan = require('morgan');
 const path = require('path');
+const PaymentGatewayManager = require('./utils/paymentGateway');
+const I18nManager = require('./utils/i18n');
 require('dotenv').config();
 
 // Configurar Mercado Pago diretamente
@@ -15,6 +17,10 @@ process.env.MERCADOPAGO_ACCESS_TOKEN = 'APP_USR-5969941047594277-072320-3fc5aed7
 
 const app = express();
 const PORT = parseInt(process.env.PORT) || 5000;
+
+// Inicializar sistemas internacionais
+const paymentGateway = new PaymentGatewayManager();
+const i18n = new I18nManager();
 
 // Health check endpoint para deployment
 app.get('/health', (req, res) => {
@@ -109,6 +115,9 @@ app.use(session({
 // Passport setup
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Sistema de internacionalização
+app.use(i18n.middleware());
 
 // Discord OAuth Strategy
 if (!process.env.DISCORD_CLIENT_ID || !process.env.DISCORD_CLIENT_SECRET) {
@@ -260,6 +269,23 @@ app.get('/invite', (req, res) => {
   } else {
     res.redirect('/');
   }
+});
+
+// Rota internacional de planos
+app.get('/international-plans', (req, res) => {
+  const convertedPrices = {
+    premium: paymentGateway.convertPrice('premium', res.locals.currency),
+    vitalicio: paymentGateway.convertPrice('vitalicio', res.locals.currency)
+  };
+  
+  const availableGateways = paymentGateway.getAvailableGateways(res.locals.country);
+  
+  res.render('premium/international-plans', { 
+    title: res.locals.t('pricing.title') + ' - Lumi',
+    user: req.user || null,
+    convertedPrices: convertedPrices,
+    availableGateways: availableGateways
+  });
 });
 
 // Home route

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="<%= locale %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= t('pricing.title') %> - Lumi</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/lumi-avatar.png?v=6">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0F0B19 0%, #2D1B69 50%, #7B2CBF 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        /* Pricing Section */
+        .pricing-section {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.popular {
+            border-color: #7B2CBF;
+            background: rgba(123, 44, 191, 0.2);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #7B2CBF, #9D4EDD);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .plan-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #7B2CBF;
+            margin-bottom: 8px;
+        }
+        
+        .plan-period {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+        
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 16px;
+        }
+        
+        .plan-features i {
+            color: #00D26A;
+            width: 20px;
+        }
+        
+        .plan-btn {
+            width: 100%;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .plan-btn.primary {
+            background: linear-gradient(135deg, #7B2CBF, #9D4EDD);
+            color: white;
+        }
+        
+        .plan-btn.accent {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #0F0B19;
+        }
+        
+        .plan-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Payment Methods */
+        .payment-methods {
+            margin: 60px 0;
+            text-align: center;
+        }
+        
+        .payment-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .payment-gateway {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+        }
+        
+        .gateway-logo {
+            width: 80px;
+            height: 50px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gateway-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .payment-methods-list {
+            list-style: none;
+        }
+        
+        .payment-methods-list li {
+            padding: 4px 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .coming-soon {
+            opacity: 0.6;
+            position: relative;
+        }
+        
+        .coming-soon::after {
+            content: "Em Breve";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #FFA500;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .payment-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation --> 
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <img src="/images/lumi-avatar.png" alt="Lumi">
+                    <span class="logo-text">Lumi</span>
+                </a>
+                
+                <div class="nav-links">
+                    <%- include('../partials/language-selector') %>
+                    <a href="/"><%= t('navigation.home') %></a>
+                    <a href="/premium/demo"><%= t('navigation.demo') %></a>
+                    <% if (user) { %>
+                        <a href="/dashboard" style="background: linear-gradient(135deg, #7B2CBF, #9D4EDD); padding: 10px 20px; border-radius: 8px; text-decoration: none; color: white;">
+                            <%= t('navigation.dashboard') %>
+                        </a>
+                    <% } else { %>
+                        <a href="/auth/discord" style="background: linear-gradient(135deg, #7B2CBF, #9D4EDD); padding: 10px 20px; border-radius: 8px; text-decoration: none; color: white;">
+                            <i class="fab fa-discord"></i> <%= t('navigation.login') %>
+                        </a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title"><%= t('pricing.title') %></h1>
+                <p class="section-subtitle"><%= t('pricing.subtitle') %></p>
+            </div>
+            
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <h3 class="plan-name"><%= t('pricing.free.name') %></h3>
+                    <div class="plan-price"><%= formatCurrency(0) %></div>
+                    <p class="plan-period"><%= t('pricing.free.period') %></p>
+                    
+                    <ul class="plan-features">
+                        <% t('pricing.free.features').forEach(feature => { %>
+                            <li><i class="fas fa-check"></i> <%- feature %></li>
+                        <% }) %>
+                    </ul>
+                    
+                    <a href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_ID&permissions=8&scope=bot" class="plan-btn primary" target="_blank">
+                        <%= t('pricing.free.cta') %>
+                    </a>
+                </div>
+                
+                <!-- Premium Plan -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge"><%= t('pricing.premium.popular') %></div>
+                    <h3 class="plan-name"><%= t('pricing.premium.name') %></h3>
+                    <div class="plan-price"><%= formatCurrency(convertedPrices.premium) %></div>
+                    <p class="plan-period"><%= t('pricing.premium.period') %></p>
+                    
+                    <ul class="plan-features">
+                        <% t('pricing.premium.features').forEach(feature => { %>
+                            <li><i class="fas fa-check"></i> <%- feature %></li>
+                        <% }) %>
+                    </ul>
+                    
+                    <button class="plan-btn primary" onclick="startPayment('premium')">
+                        <%= t('pricing.premium.cta') %>
+                    </button>
+                </div>
+                
+                <!-- Lifetime Plan -->
+                <div class="pricing-card">
+                    <h3 class="plan-name"><%= t('pricing.vitalicio.name') %></h3>
+                    <div class="plan-price"><%= formatCurrency(convertedPrices.vitalicio) %></div>
+                    <p class="plan-period"><%= t('pricing.vitalicio.period') %></p>
+                    
+                    <ul class="plan-features">
+                        <% t('pricing.vitalicio.features').forEach(feature => { %>
+                            <li><i class="fas fa-check"></i> <%- feature %></li>
+                        <% }) %>
+                    </ul>
+                    
+                    <button class="plan-btn accent" onclick="startPayment('vitalicio')">
+                        <%= t('pricing.vitalicio.cta') %>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods -->
+    <section class="payment-methods">
+        <div class="container">
+            <h2 class="payment-title">Métodos de Pagamento Disponíveis</h2>
+            <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 40px;">
+                Detectamos automaticamente a melhor opção para seu país: <strong><%= country %></strong>
+            </p>
+            
+            <div class="payment-grid">
+                <% availableGateways.forEach(gateway => { %>
+                    <div class="payment-gateway <%= gateway.coming_soon ? 'coming-soon' : '' %>">
+                        <div class="gateway-logo">
+                            <img src="<%= gateway.logo %>" alt="<%= gateway.display %>" style="max-width: 100%; max-height: 100%;">
+                        </div>
+                        <h3 class="gateway-name"><%= gateway.display %></h3>
+                        <ul class="payment-methods-list">
+                            <% gateway.methods.forEach(method => { %>
+                                <li>• <%= method %></li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    // Função para iniciar pagamento
+    async function startPayment(plan) {
+        if (!<%= user ? 'true' : 'false' %>) {
+            alert('<%= t("payment.login_required") %>');
+            window.location.href = '/auth/discord';
+            return;
+        }
+        
+        try {
+            // Mostrar loading
+            event.target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <%= t("payment.processing") %>';
+            event.target.disabled = true;
+            
+            // Fazer requisição para criar pagamento
+            const response = await fetch(`/api/create-international-payment`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    plan: plan,
+                    country: '<%= country %>',
+                    currency: '<%= currency %>',
+                    locale: '<%= locale %>'
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // Redirecionar para checkout
+                window.location.href = data.checkout_url;
+            } else {
+                throw new Error(data.error || '<%= t("payment.error") %>');
+            }
+            
+        } catch (error) {
+            console.error('Erro no pagamento:', error);
+            alert(error.message || '<%= t("payment.error") %>');
+            
+            // Restaurar botão
+            event.target.innerHTML = plan === 'premium' ? '<%= t("pricing.premium.cta") %>' : '<%= t("pricing.vitalicio.cta") %>';
+            event.target.disabled = false;
+        }
+    }
+    </script>
+</body>
+</html>
