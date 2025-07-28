@@ -4,49 +4,399 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/lumi-avatar.png?v=6">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=6">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/lumi-avatar.png">
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Lumi - O bot Discord mais avançado do Brasil. IA conversacional, música real do YouTube, analytics premium e muito mais!">
+    <meta name="keywords" content="Discord Bot, Bot Discord, Lumi, IA, Música, Analytics, Moderação, Premium">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google AdSense -->
+    <% if (process.env.GOOGLE_ADSENSE_CLIENT) { %>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<%= process.env.GOOGLE_ADSENSE_CLIENT %>"
+       crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="<%= process.env.GOOGLE_ADSENSE_CLIENT %>">
+    <% } %>
+    
+    <!-- Custom CSS -->
+    <link href="/css/custom.css" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: linear-gradient(135deg, #667eea, #764ba2); color: white; min-height: 100vh; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .hero { text-align: center; padding: 80px 0; }
-        .hero h1 { font-size: 4rem; margin-bottom: 20px; }
-        .hero p { font-size: 1.5rem; margin-bottom: 30px; }
-        .btn { display: inline-block; padding: 15px 30px; margin: 10px; background: #f1c40f; color: #333; text-decoration: none; border-radius: 25px; font-weight: bold; }
-        .btn:hover { transform: translateY(-3px); }
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
-        .feature { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; }
-        .feature h3 { color: #f1c40f; margin-bottom: 15px; }
+        /* Otimização do favicon */
+        link[rel*="icon"] {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <section class="hero">
-            <h1>🤖 Lumi</h1>
-            <p>O Bot Discord Mais Avançado do Brasil</p>
-            <p style="color: #f1c40f;">90% gratuito para sempre</p>
-            <button onclick="inviteBot()" class="btn">➕ Adicionar ao Discord</button>
-            <a href="/premium" class="btn">💎 Ver Premium</a>
-        </section>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="/images/lumi-avatar.png" alt="Lumi" class="logo-image">
+                <span class="logo-text">Lumi</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="/">Início</a></li>
+                <li><a href="/premium/plans">Premium</a></li>
+                <li><a href="/premium/demo">Demo</a></li>
+                <li><a href="https://discord.gg/lumi" target="_blank">Suporte</a></li>
+                
+                <% if (user) { %>
+                    <li>
+                        <a href="/dashboard" class="btn-primary">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" 
+                                 alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%;">
+                            <span style="color: white; font-size: 0.9rem;"><%= user.username %></span>
+                            <a href="/auth/logout" style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Sair</a>
+                        </div>
+                    </li>
+                <% } else { %>
+                    <li>
+                        <a href="/auth/discord" class="btn-discord">
+                            <i class="fab fa-discord"></i>
+                            Login com Discord
+                        </a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+
+<!-- Anúncio Banner Superior -->
+<% if (process.env.GOOGLE_ADSENSE_CLIENT) { %>
+<div class="ad-banner-top" style="text-align: center; padding: 10px 0; background: rgba(0,0,0,0.1);">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="<%= process.env.GOOGLE_ADSENSE_CLIENT %>"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<% } %>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-container">
+        <h1 class="fade-in">O Bot Discord Mais Avançado do Brasil</h1>
+        <p class="fade-in">
+            IA conversacional em português, música real do YouTube, analytics premium e o revolucionário sistema de auto-reparo. Tudo em um só bot!
+        </p>
         
-        <section class="features">
-            <div class="feature">
-                <h3>🎵 Música Gratuita</h3>
-                <p>Sistema completo de música YouTube totalmente grátis. Diferente do MEE6 que cobra $12/mês.</p>
+        <div class="hero-buttons fade-in">
+            <a href="/invite" class="btn-primary">
+                <i class="fab fa-discord"></i>
+                Adicionar ao Discord
+            </a>
+            <a href="/premium/demo" class="btn-secondary">
+                Ver Demo Interativa
+            </a>
+        </div>
+        
+        <div class="hero-login fade-in" style="margin-top: 1rem;">
+            <a href="/auth/discord" class="btn-outline">
+                <i class="fas fa-sign-in-alt"></i>
+                Fazer Login para Gerenciar
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+    <div class="stats-container">
+        <div class="stat-item">
+            <i class="fas fa-server"></i>
+            <div class="stat-number">4+</div>
+            <div class="stat-label">Servidores</div>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <div class="stat-number">1.250+</div>
+            <div class="stat-label">Usuários</div>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <div class="stat-number">99.9%</div>
+            <div class="stat-label">Uptime</div>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-terminal"></i>
+            <div class="stat-number">37</div>
+            <div class="stat-label">Comandos</div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="features-container">
+        <h2 class="section-title">Recursos Revolucionários</h2>
+        <p class="section-subtitle">
+            Descubra os recursos únicos que fazem da Lumi o bot Discord mais avançado do Brasil
+        </p>
+        
+        <div class="features-grid">
+            <!-- Auto Reparo -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-wrench"></i>
+                </div>
+                <h3>Auto-Reparo Revolucionário</h3>
+                <p>
+                    Primeiro bot do mundo com sistema de diagnóstico e reparo automático. Detecta e corrige problemas sozinho, sem sua intervenção.
+                </p>
             </div>
-            <div class="feature">
-                <h3>🛡️ Moderação</h3>
-                <p>Sistema avançado de moderação com auto-punições e filtros inteligentes.</p>
+            
+            <!-- IA Conversacional -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>IA Conversacional</h3>
+                <p>
+                    Primeira IA verdadeiramente conversacional em português. Aprende com seu servidor e oferece respostas contextuais inteligentes.
+                </p>
             </div>
-            <div class="feature">
-                <h3>🤖 IA Real</h3>
-                <p>Primeira IA conversacional brasileira com análise de sentimentos.</p>
+            
+            <!-- Música Real -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h3>Música Real do YouTube</h3>
+                <p>
+                    Sistema de música com busca real no YouTube, sem limitações. Interface moderna com controles por botões.
+                </p>
             </div>
-        </section>
+            
+            <!-- Analytics Premium -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Analytics com Dados Reais</h3>
+                <p>
+                    Estatísticas autênticas do seu servidor, não simuladas. Exportação em PDF/Excel e insights de crescimento.
+                </p>
+            </div>
+            
+            <!-- Interface Moderna -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <h3>Interface Superior</h3>
+                <p>
+                    Dashboard web moderno e botões funcionais no Discord. Interface intuitiva e design profissional.
+                </p>
+            </div>
+            
+            <!-- Suporte BR -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Suporte Brasileiro</h3>
+                <p>
+                    Suporte especializado em português, feito por brasileiros para brasileiros. Compreendemos sua comunidade.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Lumi Section -->
+<section class="pricing">
+    <div class="pricing-container">
+        <h2 class="section-title">Por que Escolher a Lumi?</h2>
+        <p class="section-subtitle">
+            Recursos únicos que você não encontra em nenhum outro bot Discord
+        </p>
+        
+        <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 3rem;">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>100% Brasileiro</h3>
+                <p>Criado e mantido por desenvolvedores brasileiros, com total compreensão da cultura e necessidades da nossa comunidade.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Primeira com Auto-Reparo</h3>
+                <p>Sistema revolucionário que detecta e corrige problemas automaticamente, mantendo seu servidor sempre funcionando.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Feito com Paixão</h3>
+                <p>Desenvolvido com dedicação total por Guilherme Almeida (Dy. Black), cada linha de código pensada para a excelência.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="features">
+    <div class="features-container">
+        <h2 class="section-title">Novo Sistema de Planos Simplificado</h2>
+        <p class="section-subtitle">
+            90% gratuito para sempre + opção vitalícia única no Brasil
+        </p>
+        
+        <div class="pricing-grid">
+            <!-- Free Plan -->
+            <div class="pricing-card">
+                <h3 class="plan-name">Gratuito</h3>
+                <div class="plan-price">R$ 0</div>
+                <p class="plan-period">para sempre</p>
+                
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> 🎵 Música YouTube GRATUITA</li>
+                    <li><i class="fas fa-check"></i> 🛡️ Moderação visual completa</li>
+                    <li><i class="fas fa-check"></i> 📊 Logs inteligentes</li>
+                    <li><i class="fas fa-check"></i> ⚙️ Reaction roles ILIMITADOS</li>
+                    <li><i class="fas fa-check"></i> 💰 Sistema econômico completo</li>
+                    <li><i class="fas fa-check"></i> 🎮 Mini-games interativos</li>
+                </ul>
+                
+                <a href="/auth/discord" class="plan-btn secondary">
+                    Começar Grátis
+                </a>
+            </div>
+            
+            <!-- Premium Plan -->
+            <div class="pricing-card featured">
+                <div class="popular-badge">Mais Popular</div>
+                <h3 class="plan-name">Premium</h3>
+                <div class="plan-price">R$ 9,90</div>
+                <p class="plan-period">/mês</p>
+                
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> + TUDO do Gratuito</li>
+                    <li><i class="fas fa-check"></i> 🤖 IA conversacional avançada</li>
+                    <li><i class="fas fa-check"></i> 📈 Analytics detalhados</li>
+                    <li><i class="fas fa-check"></i> 🎨 Personalização avançada</li>
+                    <li><i class="fas fa-check"></i> 💬 Suporte padrão (24h)</li>
+                </ul>
+                
+                <a href="/premium/plans" class="plan-btn primary">
+                    Escolher Premium
+                </a>
+            </div>
+            
+            <!-- Vitalicio Plan -->
+            <div class="pricing-card">
+                <h3 class="plan-name">Vitalício</h3>
+                <div class="plan-price">R$ 79,90</div>
+                <p class="plan-period">pagamento único</p>
+                
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> + TUDO do Premium</li>
+                    <li><i class="fas fa-check"></i> 🚀 API personalizada</li>
+                    <li><i class="fas fa-check"></i> ⭐ Recursos exclusivos</li>
+                    <li><i class="fas fa-check"></i> 👑 Suporte VIP (2h)</li>
+                    <li><i class="fas fa-check"></i> 💰 SEM MENSALIDADE</li>
+                    <li><i class="fas fa-crown"></i> = 8 meses de Premium!</li>
+                </ul>
+                
+                <a href="/premium/vitalicio" class="plan-btn accent">
+                    Escolher Vitalício
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+    <div class="cta-container">
+        <h2 class="section-title">Pronto para Revolucionar seu Servidor?</h2>
+        <p class="section-subtitle">
+            Junte-se aos milhares de usuários que já descobriram o poder da Lumi
+        </p>
+        <div class="hero-buttons">
+            <a href="/auth/discord" class="btn-primary">
+                <i class="fab fa-discord"></i>
+                Adicionar ao Discord Agora
+            </a>
+            <a href="/premium/demo" class="btn-secondary">
+                Experimentar Demo Premium
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <div class="logo">
+                <img src="/images/lumi-avatar.png" alt="Lumi" class="logo-image">
+                <span class="logo-text">Lumi</span>
+            </div>
+            <p>O bot Discord mais avançado do Brasil. IA conversacional, música real e muito mais!</p>
+        </div>
+        
+        <div class="footer-links">
+            <div>
+                <h3>Recursos</h3>
+                <ul>
+                    <li><a href="/premium/demo">Demo Interativa</a></li>
+                    <li><a href="/premium/plans">Planos Premium</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3>Suporte</h3>
+                <ul>
+                    <li><a href="https://discord.gg/lumi">Discord</a></li>
+                    <li><a href="mailto:suporte@lumibot.com.br">Email</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="/privacy">Privacidade</a></li>
+                    <li><a href="/terms">Termos de Uso</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
     
-    <script>
-        function inviteBot() {
-            window.open('https://discord.com/api/oauth2/authorize?client_id=1398433869212028938&permissions=8&scope=bot%20applications.commands', '_blank');
-        }
-    </script>
+    <div class="footer-bottom">
+        <p>
+            © 2025 Lumi Bot. Desenvolvido por 
+            <a href="https://github.com/dyblack" class="dev-link">
+                Guilherme Almeida (Dy. Black)
+            </a>
+        </p>
+    </div>
+</footer>
+
 </body>
 </html>

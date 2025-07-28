@@ -1,16 +1,29 @@
 {
   "name": "lumi-website",
-  "version": "1.0.0", 
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "Site oficial da Lumi - O Bot Discord Mais Avançado do Brasil",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node app.js",
+    "dev": "node app.js",
+    "build": "echo 'Build completed'"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "ejs": "^3.1.9",
     "express-session": "^1.17.3",
     "passport": "^0.6.0",
     "passport-discord": "^0.1.4",
-    "dotenv": "^16.3.1"
-  }
+    "ejs": "^3.1.9",
+    "dotenv": "^16.3.1",
+    "mercadopago": "^1.5.17",
+    "compression": "^1.7.4",
+    "helmet": "^7.0.0",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": ["discord", "bot", "lumi", "brasil"],
+  "author": "Guilherme Almeida (Dy. Black)",
+  "license": "MIT"
 }
