@@ -323,8 +323,8 @@
     <!-- Header -->
     <section class="header">
         <div class="container">
-            <h1>Planos Premium</h1>
-            <p>Desbloqueie todo o potencial da Lumi com recursos exclusivos e suporte VIP</p>
+            <h1>Novo Sistema de Planos Simplificado</h1>
+            <p>90% das funcionalidades GRATUITAS para sempre + plano vitalício ÚNICO no Brasil</p>
         </div>
     </section>
 
@@ -334,60 +334,62 @@
             <div class="plans-grid">
                 <!-- Free Plan -->
                 <div class="plan-card">
-                    <h3 class="plan-title">Free</h3>
-                    <div class="plan-price">Grátis</div>
+                    <h3 class="plan-title">Gratuito</h3>
+                    <div class="plan-price">R$ 0</div>
                     <div class="plan-period">Para sempre</div>
                     
                     <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> 40+ Comandos Funcionais</li>
-                        <li><i class="fas fa-check"></i> Música Real do YouTube</li>
-                        <li><i class="fas fa-check"></i> Sistema de Níveis</li>
-                        <li><i class="fas fa-check"></i> Moderação Básica</li>
-                        <li><i class="fas fa-check"></i> Mini-games Interativos</li>
+                        <li><i class="fas fa-check"></i> 🎵 Música YouTube GRATUITA</li>
+                        <li><i class="fas fa-check"></i> 🛡️ Moderação visual completa</li>
+                        <li><i class="fas fa-check"></i> 📊 Logs inteligentes</li>
+                        <li><i class="fas fa-check"></i> ⚙️ Reaction roles ILIMITADOS</li>
+                        <li><i class="fas fa-check"></i> 💰 Sistema econômico completo</li>
+                        <li><i class="fas fa-check"></i> 🎮 Mini-games interativos</li>
+                        <li><i class="fas fa-check"></i> 🔧 Sistema de auto-reparo</li>
                     </ul>
                     
                     <button class="plan-btn btn-free" disabled>
-                        Plano Atual
+                        GRATUITO PARA SEMPRE
                     </button>
                 </div>
 
-                <!-- Pro Plan -->
+                <!-- Premium Plan -->
                 <div class="plan-card featured">
-                    <h3 class="plan-title">Pro</h3>
-                    <div class="plan-price">R$ 15</div>
+                    <h3 class="plan-title">Premium</h3>
+                    <div class="plan-price">R$ 9,90</div>
                     <div class="plan-period">por mês</div>
                     
                     <ul class="plan-features">
-                        <li><i class="fas fa-star"></i> Tudo do Free +</li>
-                        <li><i class="fas fa-brain"></i> IA Avançada com Memória</li>
-                        <li><i class="fas fa-chart-line"></i> Analytics de 30 Dias</li>
-                        <li><i class="fas fa-palette"></i> 15+ Temas Premium</li>
-                        <li><i class="fas fa-music"></i> Música Premium 320kbps</li>
-                        <li><i class="fas fa-headset"></i> Suporte VIP < 2h</li>
+                        <li><i class="fas fa-star"></i> + TUDO do Gratuito</li>
+                        <li><i class="fas fa-brain"></i> 🤖 IA conversacional avançada</li>
+                        <li><i class="fas fa-chart-line"></i> 📈 Analytics detalhados</li>
+                        <li><i class="fas fa-palette"></i> 🎨 Personalização avançada</li>
+                        <li><i class="fas fa-headset"></i> 💬 Suporte padrão (24h)</li>
+                        <li><i class="fas fa-crown"></i> 🌟 Badge Premium</li>
                     </ul>
                     
-                    <button class="plan-btn btn-pro" id="btn-pro" data-plan="pro">
-                        Escolher Pro
+                    <button class="plan-btn btn-pro" id="btn-premium" data-plan="premium">
+                        Escolher Premium
                     </button>
                 </div>
 
-                <!-- Enterprise Plan -->
+                <!-- Vitalicio Plan -->
                 <div class="plan-card">
-                    <h3 class="plan-title">Enterprise</h3>
-                    <div class="plan-price">R$ 45</div>
-                    <div class="plan-period">por mês</div>
+                    <h3 class="plan-title">Vitalício</h3>
+                    <div class="plan-price">R$ 79,90</div>
+                    <div class="plan-period">pagamento único</div>
                     
                     <ul class="plan-features">
-                        <li><i class="fas fa-crown"></i> Tudo do Pro +</li>
-                        <li><i class="fas fa-robot"></i> IA Personalizada Exclusiva</li>
-                        <li><i class="fas fa-infinity"></i> Analytics Ilimitados</li>
-                        <li><i class="fas fa-clock"></i> Suporte 24/7 Dedicado</li>
-                        <li><i class="fas fa-rocket"></i> Consultoria de Crescimento</li>
-                        <li><i class="fas fa-cog"></i> Recursos Personalizados</li>
+                        <li><i class="fas fa-crown"></i> + TUDO do Premium</li>
+                        <li><i class="fas fa-rocket"></i> 🚀 API personalizada</li>
+                        <li><i class="fas fa-star"></i> ⭐ Recursos exclusivos</li>
+                        <li><i class="fas fa-clock"></i> 👑 Suporte VIP (2h)</li>
+                        <li><i class="fas fa-infinity"></i> 💰 SEM MENSALIDADE</li>
+                        <li><i class="fas fa-heart"></i> 💎 = 8 meses de Premium!</li>
                     </ul>
                     
-                    <button class="plan-btn btn-enterprise" id="btn-enterprise" data-plan="enterprise">
-                        Escolher Enterprise
+                    <button class="plan-btn btn-enterprise" id="btn-vitalicio" data-plan="vitalicio">
+                        Escolher Vitalício
                     </button>
                 </div>
             </div>
@@ -495,26 +497,26 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOM carregado');
             
-            const proButton = document.getElementById('btn-pro');
-            const enterpriseButton = document.getElementById('btn-enterprise');
+            const premiumButton = document.getElementById('btn-premium');
+            const vitalicioButton = document.getElementById('btn-vitalicio');
             
-            console.log('Botão Pro encontrado:', !!proButton);
-            console.log('Botão Enterprise encontrado:', !!enterpriseButton);
+            console.log('Botão Premium encontrado:', !!premiumButton);
+            console.log('Botão Vitalício encontrado:', !!vitalicioButton);
             
-            if (proButton) {
-                proButton.addEventListener('click', function(e) {
+            if (premiumButton) {
+                premiumButton.addEventListener('click', function(e) {
                     e.preventDefault();
                     const plan = this.getAttribute('data-plan');
-                    console.log('Clique no botão Pro detectado, plano:', plan);
+                    console.log('Clique no botão Premium detectado, plano:', plan);
                     selectPlan(plan);
                 });
             }
             
-            if (enterpriseButton) {
-                enterpriseButton.addEventListener('click', function(e) {
+            if (vitalicioButton) {
+                vitalicioButton.addEventListener('click', function(e) {
                     e.preventDefault();
                     const plan = this.getAttribute('data-plan');
-                    console.log('Clique no botão Enterprise detectado, plano:', plan);
+                    console.log('Clique no botão Vitalício detectado, plano:', plan);
                     selectPlan(plan);
                 });
             }

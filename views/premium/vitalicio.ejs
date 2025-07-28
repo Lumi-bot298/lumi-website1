@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano Vitalício - Lumi</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/lumi-avatar.png?v=6">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0F0B19 0%, #2D1B69 50%, #7B2CBF 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #7B2CBF, #9D4EDD);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero .crown {
+            font-size: 5rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .vitalicio-price {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid #FFD700;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+        
+        .price-main {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #FFD700;
+            margin-bottom: 8px;
+        }
+        
+        .price-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .price-comparison {
+            font-size: 16px;
+            color: #00D26A;
+            font-weight: 600;
+        }
+        
+        /* Features Grid */
+        .features-section {
+            padding: 80px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        /* Benefits List */
+        .benefits-list {
+            list-style: none;
+            margin: 40px 0;
+        }
+        
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+        
+        .benefits-list i {
+            color: #FFD700;
+            font-size: 20px;
+        }
+        
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #0F0B19 !important;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.3s;
+            display: inline-block;
+            margin-top: 40px;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .footer p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer a {
+            color: #7B2CBF;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <img src="/images/lumi-avatar.png" alt="Lumi">
+                    <span class="logo-text">Lumi</span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="/">Início</a>
+                    <a href="/premium/plans">Planos</a>
+                    <a href="/premium/demo">Demo</a>
+                    <% if (user) { %>
+                        <a href="/dashboard" class="btn-primary">Dashboard</a>
+                    <% } else { %>
+                        <a href="/auth/discord" class="btn-primary">
+                            <i class="fab fa-discord"></i> Login
+                        </a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <i class="fas fa-crown crown"></i>
+            <h1>Plano Vitalício</h1>
+            <p>Pague uma vez e tenha acesso premium PARA SEMPRE. O único plano vitalício para Discord bot no Brasil!</p>
+            
+            <div class="vitalicio-price">
+                <div class="price-main">R$ 79,90</div>
+                <div class="price-subtitle">Pagamento único - SEM MENSALIDADE</div>
+                <div class="price-comparison">🔥 Economize 89% vs MEE6 anual!</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 20px;">Por que escolher o Vitalício?</h2>
+            
+            <ul class="benefits-list" style="max-width: 600px; margin: 0 auto;">
+                <li><i class="fas fa-crown"></i> <strong>TUDO do Premium</strong> + recursos exclusivos</li>
+                <li><i class="fas fa-rocket"></i> <strong>API personalizada</strong> para seu servidor</li>
+                <li><i class="fas fa-star"></i> <strong>Recursos exclusivos</strong> só para vitalícios</li>
+                <li><i class="fas fa-headset"></i> <strong>Suporte VIP</strong> com resposta em até 2h</li>
+                <li><i class="fas fa-heart"></i> <strong>Badge especial</strong> de apoiador vitalício</li>
+                <li><i class="fas fa-infinity"></i> <strong>SEM MENSALIDADE</strong> - pague uma vez só</li>
+                <li><i class="fas fa-calculator"></i> <strong>Se paga em 8 meses</strong> vs Premium mensal</li>
+            </ul>
+            
+            <div style="text-align: center;">
+                <a href="/premium/checkout/vitalicio" class="cta-button">
+                    <i class="fas fa-crown"></i>
+                    Escolher Vitalício Agora
+                </a>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>Economia Inteligente</h3>
+                    <p>R$ 79,90 uma vez vs R$ 9,90/mês = Se paga em apenas 8 meses. Depois disso, é economia pura para sempre!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Recursos Exclusivos</h3>
+                    <p>API personalizada, recursos únicos e funcionalidades que só usuários vitalícios têm acesso.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3>Status VIP</h3>
+                    <p>Suporte prioritário, badge exclusivo e reconhecimento como apoiador oficial da Lumi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px;">
+                <img src="/images/lumi-avatar.png" alt="Lumi" style="width: 32px; height: 32px; border-radius: 50%;">
+                <span style="font-size: 20px; font-weight: 700;">Lumi</span>
+            </div>
+            <p>
+                © 2025 Lumi Bot. Desenvolvido por 
+                <a href="https://github.com/dyblack">Guilherme Almeida (Dy. Black)</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

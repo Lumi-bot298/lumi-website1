@@ -56,25 +56,25 @@ router.get('/demo', (req, res) => {
   });
 });
 
-// Página Enterprise
-router.get('/enterprise', (req, res) => {
-  res.render('premium/enterprise', {
-    title: 'Plano Enterprise - Lumi',
+// Página Vitalício
+router.get('/vitalicio', (req, res) => {
+  res.render('premium/vitalicio', {
+    title: 'Plano Vitalício - Lumi',
     user: req.user || null,
-    page: 'premium-enterprise'
+    page: 'premium-vitalicio'
   });
 });
 
-// Rota para iniciar checkout Pro
-router.post('/checkout/pro', ensureAuthenticated, (req, res) => {
-  // Redirect to Stripe checkout for Pro plan
-  res.redirect('/api/create-checkout-session?plan=pro');
+// Rota para iniciar checkout Premium
+router.post('/checkout/premium', ensureAuthenticated, (req, res) => {
+  // Redirect to payment system for Premium plan
+  res.redirect('/api/create-checkout-session?plan=premium');
 });
 
-// Rota para iniciar checkout Enterprise  
-router.post('/checkout/enterprise', ensureAuthenticated, (req, res) => {
-  // Redirect to Stripe checkout for Enterprise plan
-  res.redirect('/api/create-checkout-session?plan=enterprise');
+// Rota para iniciar checkout Vitalício  
+router.post('/checkout/vitalicio', ensureAuthenticated, (req, res) => {
+  // Redirect to payment system for Vitalício plan
+  res.redirect('/api/create-checkout-session?plan=vitalicio');
 });
 
 module.exports = router;
